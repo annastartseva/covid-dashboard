@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Covid Dashboard</title>
+	<!--<link rel="shortcut icon" href="./assets/images/favicon.ico">-->
+</head>
+
+<body>
+	<header>
+		<div class="header__wrapper">
+			<div class="header__logo">
+				<img src="./assets/images/virus.png" alt="covid logo" class="header__logo-img">
+			</div>
+			<h1 class="header__title">Covid Dashboard</h1>
+		</div>
+
+	</header>
+	<main>
+		<div class="data__wrap">
+			<div class="first__column-wrap">
+				<div class="wrap table__summery-wrap">
+					<h2 class="table__summery-title">Global Cases</h2>
+
+					<div class="button__wrap">
+						<button class="button__all-period button select">ALL PERIOD</button>
+						<button class="button__last-day button">TODAY</button>
+						<button class="button__abs button select">ABS</button>
+						<button class="button__per-population button">PER 100 000</button>
+
+					</div>
+					<div class="table__summery-data">
+						<div class="table__summery-data-title ">Total Confirmed</div>
+						<div class="table__summery-data-number" id="total_confirm">1162857</div>
+					</div>
+					<div class="table__summery-data">
+						<div class="table__summery-data-title">Total Recovered</div>
+						<div class="table__summery-data-number" id="total_recover">230845</div>
+					</div>
+					<div class="table__summery-data">
+						<div class="table__summery-data-title">Total Deaths</div>
+						<div class="table__summery-data-number" id="total_deaths">63263</div>
+					</div>
+					<!--<table class="table__global">
+                        <tr class="table__global-row">
+                            <td class="table__global-column">Total Confirmed</td>
+                            <td class="table__global-column">1162857</td>
+                        </tr>
+                        <tr class="table__global-row">
+                            <td class="table__global-column">Total Recovered</td>
+                            <td class="table__global-column">230845</td>
+                        </tr>
+                        <tr class="table__global-row">
+                            <td class="table__global-column">Total Deaths</td>
+                            <td class="table__global-column">63263</td>
+                        </tr>
+                    </table>-->
+				</div>
+
+				<div class="wrap chart-wrap">chart</div>
+			</div>
+
+
+			<div class="wrap map__data-wrap">map</div>
+			<div class="wrap table__city-list-wrap">table__city </div>
+		</div>
+
+
+
+	</main>
+	<footer class="footer">
+		<div class="footer__wrapper">
+
+			<div class="footer__link footer__link__autor">
+				<div class="footer__link footer__link-year"> 2020, </div>
+				<a href="https://github.com/annastartseva" class="footer__link-href-autor">annastartseva/</a>
+				<a href="https://github.com/TimurSyrlybayev" class="footer__link-href-autor">TimurSyrlybayev</a>
+			</div>
+
+			<div class="footer__link footer__link-rs">
+
+				<a href="https://rs.school/js/" class="footer__link-href">
+					<img class="footer__icon-js" src="./assets/images/logo_rs.png" alt="RS School logotip ">
+				</a>
+
+			</div>
+		</div>
+	</footer>
+
+</body>
+
+</html>

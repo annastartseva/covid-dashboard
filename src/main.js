@@ -1,7 +1,8 @@
 import { setDataAllPeriodForGlobalTable, setDataTodayForGlobalTable } from './globalTable';
+import { createDataStructure } from './dataStructuring';
 
 // const url
-const urlSummary = 'https://api.covid19api.com/summary';
+const urlSummary = 'https://disease.sh/v3/covid-19/all';
 
 const state = {
   dataCovid: null, // data from API
@@ -11,6 +12,9 @@ const state = {
   allWorld: true,
   countryId: null,
   population: null, // all word or select country
+  confirmed: true,
+  recovered: false,
+  deaths: false,
 };
 
 // setDataToTableGlobal rename 
@@ -35,7 +39,7 @@ const countPopulationTotal = () => {
 
 async function getDataByCountry() {
   console.log('function getDataByCountry');
-  const countriesDataInJSON = await fetch('https://restcountries.eu/rest/v2/all?fields=name;population;flag');
+  const countriesDataInJSON = await fetch('https://disease.sh/v3/covid-19/countries');
   state.dataCountryInfo = await countriesDataInJSON.json();
   console.log('state.dataCountryInfo: ', state.dataCountryInfo);
 }
@@ -50,6 +54,7 @@ async function getSummaryGlobalData() {
   console.log('TotalDeaths: ', state.dataCovid.Global.TotalDeaths);
   console.log('TotalRecovered: ', state.dataCovid.Global.TotalRecovered);
   setDataToAllElement();
+  createDataStructure(state.dataCovid, state.dataCountryInfo);
 }
 
 // first page load

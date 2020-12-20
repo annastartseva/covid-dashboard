@@ -21,10 +21,10 @@ const setDataAllPeriodForGlobalTable = (data) => {
   let totalConfirmedData = data.Global.TotalConfirmed;
   let totalRecoverData = data.Global.TotalRecovered;
   let totalDeathsData = data.Global.TotalDeaths;
-  if (state.absValue === false) {
-    totalConfirmedData = Math.round(totalConfirmedData / (state.population / 100000));
-    totalRecoverData = Math.round(totalRecoverData / (state.population / 100000));
-    totalDeathsData = Math.round(totalDeathsData / (state.population / 100000));
+  if (state.absValue === false) {   
+    totalConfirmedData = Math.round((totalConfirmedData / state.population) * 100000);
+    totalRecoverData = Math.round((totalRecoverData / state.population) * 100000);
+    totalDeathsData = Math.round((totalDeathsData / state.population) * 100000);
   }
   setDataToDomElement(totalConfirmedData, totalRecoverData, totalDeathsData);
 };
@@ -34,9 +34,12 @@ const setDataTodayForGlobalTable = (data) => {
   let todayRecoverData = data.Global.NewRecovered;
   let todayDeathsData = data.Global.NewDeaths;
   if (state.absValue === false) {
-    todayConfirmedData = Math.round(todayConfirmedData / (state.population / 100000));
-    todayRecoverData = Math.round(todayRecoverData / (state.population / 100000));
-    todayDeathsData = Math.round(todayDeathsData / (state.population / 100000));
+    todayConfirmedData = todayConfirmedData / (state.population / 100000);
+    todayRecoverData = todayRecoverData / (state.population / 100000);
+    todayDeathsData = todayDeathsData / (state.population / 100000);
+    todayConfirmedData = Math.round(todayConfirmedData * 100) / 100;
+    todayRecoverData = Math.round(todayRecoverData * 100) / 100;
+    todayDeathsData = Math.round(todayDeathsData * 100) / 100;
   }
   setDataToDomElement(todayConfirmedData, todayRecoverData, todayDeathsData);
 };

@@ -3,10 +3,6 @@ import { state } from './main';
 // const stateData = state;
 
 // Table Global Case
-const buttonSummaryAllPeriod = document.querySelector('.button__all-period');
-const buttonSummaryToday = document.querySelector('.button__last-day');
-const buttonSummaryAbs = document.querySelector('.button__abs');
-const buttonSummaryPerPopulation = document.querySelector('.button__per-population');
 const totalConfirmed = document.querySelector('#total_confirm');
 const totalRecover = document.querySelector('#total_recover');
 const totalDeaths = document.querySelector('#total_deaths');

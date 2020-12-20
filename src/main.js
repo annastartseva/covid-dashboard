@@ -12,7 +12,7 @@ const state = {
   allPeriod: true,
   absValue: true,
   allWorld: true,
-  countryId: null, 
+  countryId: null,
   confirmed: true,
   recovered: false,
   deaths: false,
@@ -32,7 +32,7 @@ async function getSummaryGlobalData() {
   state.dataCovid = await res.json();
   //console.log('state.dataCovid: ', state.dataCovid);
   setDataAllPeriodForGlobalTable(state.dataCovid);
-  createDataStructure(state.dataCovid, state.dataCountryInfo);
+  createDataStructure(state.dataCountryInfo);
 }
 
 // first page load

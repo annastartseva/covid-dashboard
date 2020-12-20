@@ -11,119 +11,111 @@ const buttonCountriesDeaths = document.querySelector('.button__deaths-countries'
 
 const sortCountryDataByDefault = () => {
   const array = [];
-  const tableDisplayData = state.dataCovid.Countries;
-    tableDisplayData.sort((a, b) => {
-      if (a.TotalConfirmed < b.TotalConfirmed) { return 1; }
-      if (a.TotalConfirmed > b.TotalConfirmed) { return -1; }
-      return 0;
-    });
-    tableDisplayData.forEach((element) => {
-      const obj = {
-        data: element.TotalConfirmed,
-        name: element.Country,
-        flag: element.flag,
-      };
-      array.push(obj);
-    });
+  const tableDisplayData = state.dataCountryInfo;
+  tableDisplayData.sort((a, b) => {
+    if (a.cases < b.cases) { return 1; }
+    if (a.cases > b.cases) { return -1; }
+    return 0;
+  });
+  tableDisplayData.forEach((element) => {
+    const obj = {
+      data: element.cases,
+      name: element.country,
+      flag: element.countryInfo.flag,
+    };
+    array.push(obj);
+  });
   createTable(array);
 };
 
 const sortCountryDataByClick = (event) => {
   if (event.target === buttonCountriesAllPeriod) {
     state.allPeriod = true;
+    buttonCountriesAllPeriod.classList.add('select');
+    buttonCountriesToday.classList.remove('select');
   } else if (event.target === buttonCountriesToday) {
     state.allPeriod = false;
+    buttonCountriesAllPeriod.classList.remove('select');
+    buttonCountriesToday.classList.add('select');
   } else if (event.target === buttonCountriesAbs) {
     state.absValue = true;
+    buttonCountriesAbs.classList.add('select');
+    buttonCountriesPerPopulation.classList.remove('select');
   } else if (event.target === buttonCountriesPerPopulation) {
     state.absValue = false;
+    buttonCountriesAbs.classList.remove('select');
+    buttonCountriesPerPopulation.classList.add('select');
   } else if (event.target === buttonCountriesConfirmed) {
     state.confirmed = true;
     state.recovered = false;
     state.deaths = false;
+    buttonCountriesConfirmed.classList.add('select');
+    buttonCountriesRecovered.classList.remove('select');
+    buttonCountriesDeaths.classList.remove('select');
   } else if (event.target === buttonCountriesRecovered) {
     state.confirmed = false;
     state.recovered = true;
     state.deaths = false;
+    buttonCountriesConfirmed.classList.remove('select');
+    buttonCountriesRecovered.classList.add('select');
+    buttonCountriesDeaths.classList.remove('select');
   } else if (event.target === buttonCountriesDeaths) {
     state.confirmed = false;
     state.recovered = false;
     state.deaths = true;
+    buttonCountriesConfirmed.classList.remove('select');
+    buttonCountriesRecovered.classList.remove('select');
+    buttonCountriesDeaths.classList.add('select');
   }
-  
+
   const array = [];
-  const tableDisplayData = state.dataCovid.Countries;
-  
-  // if (event !== undefined && event.target.classList[0] === 'button__all-period-countries' && state.absValue === false) {
-  //   state.absValue = true;
-  // } else if (event !== undefined && event.target.classList[0] === 'button__last-day-countries' && state.absValue === true) {
-  //   state.absValue = false;
-  // }
-  // const array = [];
-  // const tableDisplayData = state.dataCovid.Countries;
-  // if ((event === undefined || event.target.classList[0] === 'button__all-period-countries') && state.allPeriod === true && state.absValue === true) {
-  //   tableDisplayData.sort((a, b) => {
-  //     if (a.TotalConfirmed < b.TotalConfirmed) { return 1; }
-  //     if (a.TotalConfirmed > b.TotalConfirmed) { return -1; }
-  //     return 0;
-  //   });
-  //   tableDisplayData.forEach((element) => {
-  //     const obj = {
-  //       data: element.TotalConfirmed,
-  //       name: element.Country,
-  //       flag: element.flag,
-  //     };
-  //     array.push(obj);
-  //   });
-  // } else if ((event === undefined || event.target.classList[0] === 'button__last-day-countries') && state.allPeriod === true && state.absValue === false) {
-  //   console.log('Сигнал:');
-  //   tableDisplayData.sort((a, b) => {
-  //     if (a.totalConfirmedAverage < b.totalConfirmedAverage) { return 1; }
-  //     if (a.totalConfirmedAverage > b.totalConfirmedAverage) { return -1; }
-  //     return 0;
-  //   });
-  //   tableDisplayData.forEach((element) => {
-  //     const obj = {
-  //       data: element.totalConfirmedAverage,
-  //       name: element.Country,
-  //       flag: element.flag,
-  //     };
-  //     array.push(obj);
-  //   });
-  // } else if (state.allPeriod === false && state.absValue === true) {
-  //   tableDisplayData.sort((a, b) => {
-  //     if (a.NewConfirmed < b.NewConfirmed) { return 1; }
-  //     if (a.NewConfirmed > b.NewConfirmed) { return -1; }
-  //     return 0;
-  //   });
-  //   tableDisplayData.forEach((element) => {
-  //     const obj = {
-  //       data: element.NewConfirmed,
-  //       name: element.Country,
-  //       flag: element.flag,
-  //     };
-  //     array.push(obj);
-  //   });
-  // } else if (state.allPeriod === false && state.absValue === false) {
-  //   tableDisplayData.sort((a, b) => {
-  //     if (a.todayConfirmedAverage < b.todayConfirmedAverage) { return 1; }
-  //     if (a.todayConfirmedAverage > b.todayConfirmedAverage) { return -1; }
-  //     return 0;
-  //   });
-  //   tableDisplayData.forEach((element) => {
-  //     const obj = {
-  //       data: element.todayConfirmedAverage,
-  //       name: element.Country,
-  //       flag: element.flag,
-  //     };
-  //     array.push(obj);
-  //   });
-  // }
-  // if (state.absValue === false) {
-  //   array.forEach((element) => {
-  //     element.data = 
-  //   });
-  // }
+  const tableDisplayData = state.dataCountryInfo;
+  const period = state.allPeriod;
+  const value = state.absValue;
+  const confirmed = state.confirmed;
+  const deaths = state.deaths;
+  const recovered = state.recovered;
+  let paramName = 'cases';
+
+  if (period === true && value === true && confirmed === true) {
+    paramName = 'cases';
+  } else if (period === false && value === true && confirmed === true) {
+    paramName = 'todayCases';
+  } else if (period === true && value === false && confirmed === true) {
+    paramName = 'totalConfirmedAverage';
+  } else if (period === false && value === false && confirmed === true) {
+    paramName = 'todayConfirmedAverage';
+  } else if (period === true && value === true && deaths === true) {
+    paramName = 'deaths';
+  } else if (period === false && value === true && deaths === true) {
+    paramName = 'todayDeaths';
+  } else if (period === true && value === false && deaths === true) {
+    paramName = 'totalDeathsAverage';
+  } else if (period === false && value === false && deaths === true) {
+    paramName = 'todayDeathsAverage';
+  } else if (period === true && value === true && recovered === true) {
+    paramName = 'recovered';
+  } else if (period === false && value === true && recovered === true) {
+    paramName = 'todayRecovered';
+  } else if (period === true && value === false && recovered === true) {
+    paramName = 'totalRecoveredAverage';
+  } else if (period === false && value === false && recovered === true) {
+    paramName = 'todayRecoveredAverage';
+  }
+
+  tableDisplayData.sort((a, b) => {
+    if (a[paramName] < b[paramName]) { return 1; }
+    if (a[paramName] > b[paramName]) { return -1; }
+    return 0;
+  });
+  tableDisplayData.forEach((element) => {
+    const obj = {
+      data: element[paramName],
+      name: element.country,
+      flag: element.countryInfo.flag,
+    };
+    array.push(obj);
+  });
   createTable(array);
 };
 

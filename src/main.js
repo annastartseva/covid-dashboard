@@ -44,7 +44,7 @@ async function getSummaryGlobalData() {
   state.dataCovid = await res.json();
   console.log('state.dataCovid: ', state.dataCovid);
   setDataToAllElement();
-  createDataStructure(state.dataCovid, state.dataCountryInfo);
+  createDataStructure(state.dataCountryInfo);
 }
 
 // first page load

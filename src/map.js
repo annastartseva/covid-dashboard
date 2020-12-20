@@ -18,62 +18,17 @@ const createMap = () => {
   map.addLayer(layer);
 };
 
-const createMarkerDataFile = () => {
-  setTimeout(() => {
-    console.log('function createMarkerDataFile');
-    const data = state.dataCountryCoordinates;
-    const dataForMap = [];
-    const hasData = Array.isArray(data) && data.length > 0;
-    if (!hasData) return;
-
-    data.forEach((item) => {
-      const obj = {
-        country: item.country,
-        countryCode: item.countryInfo.iso2,
-        // _id: item.countryInfo._id,
-        coordinates: [item.countryInfo.lat, item.countryInfo.long],
-      };
-      dataForMap.push(obj);
-    });
-
-    console.log('dataForMap ', dataForMap);
-    state.dataCountryForMap = dataForMap;
-    updateMarkerDataFile();
-  }, 1000);
-};
-
-const updateMarkerDataFile = () => {
-  console.log('function updateMarkerDataFile');
-  const data = state.dataCountryForMap;
-  const dataCovidCountries = state.dataCovid.Countries;
-  const positionId = data.map((item) => item.countryCode);
-
-  dataCovidCountries.forEach((item, index) => {
-    const idCountryId = positionId.indexOf(item.CountryCode);
-
-    if (idCountryId >= 0) {
-      state.dataCovid.Countries[index].coordinates = data[idCountryId].coordinates;
-    }
-  });
-  console.log('state.dataCovid ', state.dataCovid);
-  addMarkerOnMap();
-};
-
 const addMarkerOnMap = () => {
-  state.dataCovid.Countries.forEach(item => {
-    // console.log('item ', item);
-    if (item.coordinates) {
-      const iconOptions = typeOfMarker(item.TotalConfirmed);
-      const customIcon = L.icon(iconOptions);
-      const coordinates = item.coordinates;
-      const markerOptions = {
-        title: `${item.Country}, TotalConfirmed: ${item.TotalConfirmed}`,
-        riseOnHover: true,
-        icon: customIcon,
-      };
-
-      L.marker(coordinates, markerOptions).addTo(map);
-    }
+  state.dataCountryInfo.forEach(item => {
+    const iconOptions = typeOfMarker(item.cases);
+  const customIcon = L.icon(iconOptions);
+    const coordinates = [item.countryInfo.lat, item.countryInfo.long];
+  const markerOptions = {
+    title: `${item.country}, Total Confirmed: ${item.cases}`,
+    riseOnHover: true,
+    icon: customIcon,
+  };
+    L.marker(coordinates, markerOptions).addTo(map);
   });
 };
 
@@ -100,4 +55,4 @@ const typeOfMarker = (caseNumber) => {
   return iconOptions;
 };
 
-export { createMap, createMarkerDataFile };
+export { createMap, addMarkerOnMap };

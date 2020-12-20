@@ -1,7 +1,5 @@
 import { state } from './main';
 
-// const stateData = state;
-
 // Table Global Case
 const totalConfirmed = document.querySelector('#total_confirm');
 const totalRecover = document.querySelector('#total_recover');
@@ -39,46 +37,5 @@ const setDataTodayForGlobalTable = (data) => {
   }
   setDataToDomElement(todayConfirmedData, todayRecoverData, todayDeathsData);
 };
-
-// Listener
-//const initializationButtonListener = () => {
-//  buttonSummaryAllPeriod.addEventListener('click', () => {
-//    //console.log('state ', state);
-//    // console.log('stateData.allPeriod ', state.hasOwnProperty(allPeriod));
-//    buttonSummaryAllPeriod.classList.add('select');
-//    buttonSummaryToday.classList.remove('select');
-//    state.allPeriod = true;
-//    //console.log('stateData.allPeriod ', state.allPeriod);
-//    setDataToAllElement();
-//  });
-
-//  buttonSummaryToday.addEventListener('click', () => {
-//    //console.log('state ', state);
-//    //console.log('stateData.allPeriod ', state.allPeriod);
-//    buttonSummaryAllPeriod.classList.remove('select');
-//    buttonSummaryToday.classList.add('select');
-//    state.allPeriod = false;
-//    //console.log('stateData.allPeriod ', state.allPeriod);
-//    setDataToAllElement();
-//  });
-
-//  buttonSummaryAbs.addEventListener('click', () => {
-//    buttonSummaryPerPopulation.classList.remove('select');
-//    buttonSummaryAbs.classList.add('select');
-//    state.absValue = true;
-//    //console.log('stateData.allPeriod ', state.allPeriod);    
-//    setDataToAllElement();
-//  });
-
-//  buttonSummaryPerPopulation.addEventListener('click', () => {
-//    buttonSummaryAbs.classList.remove('select');
-//    buttonSummaryPerPopulation.classList.add('select');
-//    state.absValue = false;
-//    //console.log('stateData.allPeriod ', state.allPeriod);    
-//    setDataToAllElement();
-//  });
-//};
-
-//initializationButtonListener();
 
 export { setDataAllPeriodForGlobalTable, setDataTodayForGlobalTable };

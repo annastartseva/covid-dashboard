@@ -1,6 +1,6 @@
 import { state } from './main';
 import { setDataAllPeriodForGlobalTable, setDataTodayForGlobalTable } from './globalTable';
-import { removeMarkerOnMap } from './map';
+import { removeMarkerOnMap, addMarkerOnMap } from './map';
 
 // Table Global Case
 const buttonSummaryAllPeriod = document.querySelector('.button__all-period');
@@ -58,17 +58,17 @@ const buttonRecoverAddSelect = () => {
   buttonCountriesConfirmed.classList.remove('select');
   buttonMapConfirmed.classList.remove('select');
   buttonCountriesRecovered.classList.add('select');
-  buttonCountriesDeaths.classList.add('select');
-  buttonMapRecovered.classList.remove('select');
+  buttonMapRecovered.classList.add('select');
+  buttonCountriesDeaths.classList.remove('select');
   buttonMapDeaths.classList.remove('select');
 };
 
 const buttonDeathAddSelect = () => {
   buttonCountriesConfirmed.classList.remove('select');
   buttonMapConfirmed.classList.remove('select');
-  buttonCountriesRecovered.classList.remove('select');
-  buttonCountriesDeaths.classList.remove('select');
-  buttonMapRecovered.classList.add('select');
+  buttonCountriesRecovered.classList.remove('select');  
+  buttonMapRecovered.classList.remove('select');
+  buttonCountriesDeaths.classList.add('select');
   buttonMapDeaths.classList.add('select');
 };
 
@@ -90,6 +90,7 @@ const changeDataInAllModules = (event) => {
     buttonAllPeriodAddSelect();
     setDataAllPeriodForGlobalTable(state.dataCovid);
     removeMarkerOnMap();
+    addMarkerOnMap();
   } else if (event.target === buttonCountriesToday
     || event.target === buttonSummaryToday
     || event.target === buttonMapToday) {
@@ -97,34 +98,45 @@ const changeDataInAllModules = (event) => {
     buttonAllPeriodAddSelect();
     setDataTodayForGlobalTable(state.dataCovid);
     removeMarkerOnMap();
+    addMarkerOnMap();
   } else if (event.target === buttonSummaryAbs
     || event.target === buttonCountriesAbs
     || event.target === buttonMapAbs) {
     state.absValue = true;
     buttonAbsAddSelect();
     setDataToAllElement();
+    removeMarkerOnMap();
+    addMarkerOnMap();
   } else if (event.target === buttonSummaryPerPopulation
     || event.target === buttonCountriesPerPopulation
     || event.target === buttonMapPerPopulation) {
     state.absValue = false;
     buttonAbsAddSelect();
     setDataToAllElement();
+    removeMarkerOnMap();
+    addMarkerOnMap();
   } else if (event.target === buttonCountriesConfirmed
-    || event.target === buttonMapConfirmed) {
-    buttonConfirmAddSelect();
+    || event.target === buttonMapConfirmed) {    
     state.confirmed = true;
     state.recovered = false;
     state.deaths = false;
+    buttonConfirmAddSelect();
+    removeMarkerOnMap();
+    addMarkerOnMap();
   } else if (event.target === buttonCountriesRecovered || event.target === buttonMapRecovered) {
-    buttonRecoverAddSelect();
     state.confirmed = false;
     state.recovered = true;
     state.deaths = false;
+    buttonRecoverAddSelect();
+    removeMarkerOnMap();
+    addMarkerOnMap();
   } else if (event.target === buttonCountriesDeaths || event.target === buttonMapDeaths) {
-    buttonDeathAddSelect();
     state.confirmed = false;
     state.recovered = false;
     state.deaths = true;
+    buttonDeathAddSelect();
+    removeMarkerOnMap();
+    addMarkerOnMap();
   }
   console.log('event ', event);
 }

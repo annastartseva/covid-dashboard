@@ -166,6 +166,22 @@ button:focus {
 	border-radius: 0 0 1rem 1rem;
 }
 
+.info {
+	width: 30rem;
+	padding: 6px 8px;
+ font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+		color: rgb(243, 242, 242);
+		font-size: 1.5rem;
+	background: rgba(155, 155, 155, 0.8);
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	border-radius: 5px;
+}
+.info h4 {
+	margin: 0 0 3px;
+	color: rgb(145, 3, 3);
+}
+
 .table__city-list-wrap {
     width: 30%;
     height: 300px;

@@ -268,9 +268,18 @@ button:focus {
 /*  */
 .table__city-list-wrap {
     width: 30%;
-    height: 100%;
+    height: 300px;
+    overflow: auto;
 }
 
+#search__field {
+    position: sticky;
+    top: 0;
+}
+
+.flag-image {
+    width: 20px;
+}
 
 /* footer */
 

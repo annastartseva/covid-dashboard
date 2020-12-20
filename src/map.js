@@ -3,6 +3,7 @@ import 'leaflet/dist/leaflet.css';
 import { state } from './main';
 
 let map = '';
+let layerGroup = '';
 
 const createMap = () => {
   const mapOptions = {
@@ -18,7 +19,14 @@ const createMap = () => {
   map.addLayer(layer);
 };
 
+const removeMarkerOnMap = () => {
+  map.removeLayer(layerGroup);
+};
+
 const addMarkerOnMap = () => {
+  let markerOne = '';
+  let oneLayer = [];
+
   state.dataCountryInfo.forEach(item => {
     const iconOptions = typeOfMarker(item.cases);
   const customIcon = L.icon(iconOptions);
@@ -28,23 +36,28 @@ const addMarkerOnMap = () => {
     riseOnHover: true,
     icon: customIcon,
   };
-    L.marker(coordinates, markerOptions).addTo(map);
+    markerOne = L.marker(coordinates, markerOptions);
+    //L.marker(coordinates, markerOptions).addTo(map);
+    oneLayer.push(markerOne);
   });
+  console.log('oneLayer ', oneLayer);
+  layerGroup = L.layerGroup(oneLayer);
+  layerGroup.addTo(map);
 };
 
 const typeOfMarker = (caseNumber) => {
   let iconOptions = '';
   let iconSizeItem = '';
   if (caseNumber <= 10000) {
-    iconSizeItem = [5, 5];
-  } else if (caseNumber > 10000 && caseNumber <= 200000) {
     iconSizeItem = [10, 10];
+  } else if (caseNumber > 10000 && caseNumber <= 200000) {
+    iconSizeItem = [14, 14];
   } else if (caseNumber > 200000 && caseNumber <= 500000) {
-    iconSizeItem = [15, 15];
+    iconSizeItem = [18, 18];
   } else if (caseNumber > 500000 && caseNumber <= 1000000) {
-    iconSizeItem = [20, 20];
+    iconSizeItem = [22, 22];
   } else if (caseNumber > 1000000 && caseNumber <= 3000000) {
-    iconSizeItem = [25, 25];
+    iconSizeItem = [26, 26];
   } else if (caseNumber > 3000000) {
     iconSizeItem = [30, 30];
   }
@@ -55,4 +68,4 @@ const typeOfMarker = (caseNumber) => {
   return iconOptions;
 };
 
-export { createMap, addMarkerOnMap };
+export { createMap, addMarkerOnMap, removeMarkerOnMap };

@@ -5,3 +5,4 @@ import './map';
 import './dataStructuring';
 import './dataSort';
 import './countriesTable';
+import './eventListener';

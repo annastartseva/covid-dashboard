@@ -1,4 +1,4 @@
-import { state, setDataToAllElement } from './main';
+import { state } from './main';
 
 // const stateData = state;
 
@@ -37,52 +37,52 @@ const setDataTodayForGlobalTable = (data) => {
     todayConfirmedData = todayConfirmedData / (data.population / 100000);
     todayRecoverData = todayRecoverData / (data.population / 100000);
     todayDeathsData = todayDeathsData / (data.population / 100000);
-    todayConfirmedData = Math.round(todayConfirmedData * 100) / 100;
-    todayRecoverData = Math.round(todayRecoverData * 100) / 100;
-    todayDeathsData = Math.round(todayDeathsData * 100) / 100;
+    todayConfirmedData = todayConfirmedData.toFixed(2);
+    todayRecoverData = todayRecoverData.toFixed(2);
+    todayDeathsData = todayDeathsData.toFixed(2);
   }
   setDataToDomElement(todayConfirmedData, todayRecoverData, todayDeathsData);
 };
 
 // Listener
-const initializationButtonListener = () => {
-  buttonSummaryAllPeriod.addEventListener('click', () => {
-    console.log('state ', state);
-    // console.log('stateData.allPeriod ', state.hasOwnProperty(allPeriod));
-    buttonSummaryAllPeriod.classList.add('select');
-    buttonSummaryToday.classList.remove('select');
-    state.allPeriod = true;
-    console.log('stateData.allPeriod ', state.allPeriod);
-    setDataToAllElement();
-  });
+//const initializationButtonListener = () => {
+//  buttonSummaryAllPeriod.addEventListener('click', () => {
+//    //console.log('state ', state);
+//    // console.log('stateData.allPeriod ', state.hasOwnProperty(allPeriod));
+//    buttonSummaryAllPeriod.classList.add('select');
+//    buttonSummaryToday.classList.remove('select');
+//    state.allPeriod = true;
+//    //console.log('stateData.allPeriod ', state.allPeriod);
+//    setDataToAllElement();
+//  });
 
-  buttonSummaryToday.addEventListener('click', () => {
-    console.log('state ', state);
-    console.log('stateData.allPeriod ', state.allPeriod);
-    buttonSummaryAllPeriod.classList.remove('select');
-    buttonSummaryToday.classList.add('select');
-    state.allPeriod = false;
-    console.log('stateData.allPeriod ', state.allPeriod);
-    setDataToAllElement();
-  });
+//  buttonSummaryToday.addEventListener('click', () => {
+//    //console.log('state ', state);
+//    //console.log('stateData.allPeriod ', state.allPeriod);
+//    buttonSummaryAllPeriod.classList.remove('select');
+//    buttonSummaryToday.classList.add('select');
+//    state.allPeriod = false;
+//    //console.log('stateData.allPeriod ', state.allPeriod);
+//    setDataToAllElement();
+//  });
 
-  buttonSummaryAbs.addEventListener('click', () => {
-    buttonSummaryPerPopulation.classList.remove('select');
-    buttonSummaryAbs.classList.add('select');
-    state.absValue = true;
-    console.log('stateData.allPeriod ', state.allPeriod);    
-    setDataToAllElement();
-  });
+//  buttonSummaryAbs.addEventListener('click', () => {
+//    buttonSummaryPerPopulation.classList.remove('select');
+//    buttonSummaryAbs.classList.add('select');
+//    state.absValue = true;
+//    //console.log('stateData.allPeriod ', state.allPeriod);    
+//    setDataToAllElement();
+//  });
 
-  buttonSummaryPerPopulation.addEventListener('click', () => {
-    buttonSummaryAbs.classList.remove('select');
-    buttonSummaryPerPopulation.classList.add('select');
-    state.absValue = false;
-    console.log('stateData.allPeriod ', state.allPeriod);    
-    setDataToAllElement();
-  });
-};
+//  buttonSummaryPerPopulation.addEventListener('click', () => {
+//    buttonSummaryAbs.classList.remove('select');
+//    buttonSummaryPerPopulation.classList.add('select');
+//    state.absValue = false;
+//    //console.log('stateData.allPeriod ', state.allPeriod);    
+//    setDataToAllElement();
+//  });
+//};
 
-initializationButtonListener();
+//initializationButtonListener();
 
 export { setDataAllPeriodForGlobalTable, setDataTodayForGlobalTable };

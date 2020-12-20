@@ -27,7 +27,7 @@
           <div class="button__wrap">
             <button class="button__all-period button select">ALL PERIOD</button>
             <button class="button__last-day button">TODAY</button>
-            <button class="button__abs button select">ABS</button>
+            <button class="button__abs button button_margin select">ABS</button>
             <button class="button__per-population button">PER 100K</button>
 
           </div>
@@ -47,17 +47,26 @@
         <div class="wrap chart-wrap">chart</div>
       </div>
 
-      <div class="wrap map__data-wrap">map
+      <div class="wrap map__data-wrap">
+        <div class="button__wrap">
+          <button class="button__all-period-map button select">ALL PERIOD</button>
+          <button class="button__last-day-map button">TODAY</button>
+          <button class="button__abs-map button button_margin select">ABS</button>
+          <button class="button__per-population-map button">PER 100K</button>
+          <button class="button__confirmed-map button button_margin select">Confirmed</button>
+          <button class="button__recovered-map button">Recovered</button>
+          <button class="button__deaths-map button">Deaths</button>
+        </div>
         <div class="map__data" id="map"></div>
       </div>
 
       <div class="wrap table__city-list-wrap">
-        <div class="button__wrap-countries">
+        <div class="button__wrap">
           <button class="button__all-period-countries button select">ALL PERIOD</button>
           <button class="button__last-day-countries button">TODAY</button>
-          <button class="button__abs-countries button select">ABS</button>
+          <button class="button__abs-countries button button_margin select">ABS</button>
           <button class="button__per-population-countries button">PER 100K</button>
-          <button class="button__confirmed-countries button select">Confirmed</button>
+          <button class="button__confirmed-countries button button_margin select">Confirmed</button>
           <button class="button__recovered-countries button">Recovered</button>
           <button class="button__deaths-countries button">Deaths</button>
         </div>

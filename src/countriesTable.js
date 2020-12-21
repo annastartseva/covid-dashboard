@@ -5,16 +5,16 @@ const createTable = (dataForCreation) => {
   if (document.querySelector('#countries__table')) {
     document.querySelector('#countries__table').remove();
   }
-  if (document.querySelector('#search__field')) {
-    document.querySelector('#search__field').remove();
-  }
+  // if (document.querySelector('#search__field')) {
+  //   document.querySelector('#search__field').remove();
+  // }
 
   const wrapper = document.querySelector('.wrap.table__city-list-wrap');
 
-  const searchField = document.createElement('input');
-  searchField.setAttribute('list', 'menu');
-  searchField.id = 'search__field';
-  wrapper.appendChild(searchField);
+  // const searchField = document.createElement('input');
+  // searchField.setAttribute('list', 'menu');
+  // searchField.id = 'search__field';
+  // wrapper.appendChild(searchField);
 
   const table = document.createElement('table');
   table.id = 'countries__table';

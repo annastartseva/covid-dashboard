@@ -2,6 +2,7 @@ import { state } from './main';
 import { setDataAllPeriodForGlobalTable, setDataTodayForGlobalTable } from './globalTable';
 import { sortCountryDataByClick } from './dataSort';
 import { removeMarkerOnMap, addMarkerOnMap } from './map';
+import { searchProcess } from './search';
 
 // Table Global Case
 const buttonSummaryAllPeriod = document.querySelector('.button__all-period');
@@ -148,5 +149,5 @@ const changeDataInAllModules = (event) => {
   }
   console.log('event ', event);
 }
-
+document.querySelector('#search__field').addEventListener('input', searchProcess);
 document.querySelector('.data__wrap').addEventListener('click', (event) => changeDataInAllModules(event));

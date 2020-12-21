@@ -12,7 +12,7 @@ const createTable = (dataForCreation) => {
   const wrapper = document.querySelector('.wrap.table__city-list-wrap');
 
   const searchField = document.createElement('input');
-  searchField.setAttribute("list", "menu");
+  searchField.setAttribute('list', 'menu');
   searchField.id = 'search__field';
   wrapper.appendChild(searchField);
 

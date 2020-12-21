@@ -121,6 +121,4 @@ const sortCountryDataByClick = () => {
   createTable(array);
 };
 
-// document.querySelector('.data__wrap').addEventListener('click', (event) => sortCountryDataByClick(event));
-
 export { sortCountryDataByDefault, sortCountryDataByClick };

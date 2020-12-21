@@ -6,3 +6,4 @@ import './dataStructuring';
 import './dataSort';
 import './countriesTable';
 import './eventListener';
+import './search';

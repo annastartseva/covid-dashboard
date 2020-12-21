@@ -1,13 +1,13 @@
 import { state } from './main';
 import { createTable } from './countriesTable';
 
-const buttonCountriesAllPeriod = document.querySelector('.button__all-period-countries');
-const buttonCountriesToday = document.querySelector('.button__last-day-countries');
-const buttonCountriesAbs = document.querySelector('.button__abs-countries');
-const buttonCountriesPerPopulation = document.querySelector('.button__per-population-countries');
-const buttonCountriesConfirmed = document.querySelector('.button__confirmed-countries');
-const buttonCountriesRecovered = document.querySelector('.button__recovered-countries');
-const buttonCountriesDeaths = document.querySelector('.button__deaths-countries');
+// const buttonCountriesAllPeriod = document.querySelector('.button__all-period-countries');
+// const buttonCountriesToday = document.querySelector('.button__last-day-countries');
+// const buttonCountriesAbs = document.querySelector('.button__abs-countries');
+// const buttonCountriesPerPopulation = document.querySelector('.button__per-population-countries');
+// const buttonCountriesConfirmed = document.querySelector('.button__confirmed-countries');
+// const buttonCountriesRecovered = document.querySelector('.button__recovered-countries');
+// const buttonCountriesDeaths = document.querySelector('.button__deaths-countries');
 
 const sortCountryDataByDefault = () => {
   const array = [];
@@ -22,51 +22,53 @@ const sortCountryDataByDefault = () => {
       data: element.cases,
       name: element.country,
       flag: element.countryInfo.flag,
+      id: element.countryInfo._id,
+      iso: element.countryInfo.iso3,
     };
     array.push(obj);
   });
   createTable(array);
 };
 
-const sortCountryDataByClick = (event) => {
-  if (event.target === buttonCountriesAllPeriod) {
-    state.allPeriod = true;
-    buttonCountriesAllPeriod.classList.add('select');
-    buttonCountriesToday.classList.remove('select');
-  } else if (event.target === buttonCountriesToday) {
-    state.allPeriod = false;
-    buttonCountriesAllPeriod.classList.remove('select');
-    buttonCountriesToday.classList.add('select');
-  } else if (event.target === buttonCountriesAbs) {
-    state.absValue = true;
-    buttonCountriesAbs.classList.add('select');
-    buttonCountriesPerPopulation.classList.remove('select');
-  } else if (event.target === buttonCountriesPerPopulation) {
-    state.absValue = false;
-    buttonCountriesAbs.classList.remove('select');
-    buttonCountriesPerPopulation.classList.add('select');
-  } else if (event.target === buttonCountriesConfirmed) {
-    state.confirmed = true;
-    state.recovered = false;
-    state.deaths = false;
-    buttonCountriesConfirmed.classList.add('select');
-    buttonCountriesRecovered.classList.remove('select');
-    buttonCountriesDeaths.classList.remove('select');
-  } else if (event.target === buttonCountriesRecovered) {
-    state.confirmed = false;
-    state.recovered = true;
-    state.deaths = false;
-    buttonCountriesConfirmed.classList.remove('select');
-    buttonCountriesRecovered.classList.add('select');
-    buttonCountriesDeaths.classList.remove('select');
-  } else if (event.target === buttonCountriesDeaths) {
-    state.confirmed = false;
-    state.recovered = false;
-    state.deaths = true;
-    buttonCountriesConfirmed.classList.remove('select');
-    buttonCountriesRecovered.classList.remove('select');
-    buttonCountriesDeaths.classList.add('select');
-  }
+const sortCountryDataByClick = () => {
+  // if (event.target === buttonCountriesAllPeriod) {
+  //   state.allPeriod = true;
+  //   buttonCountriesAllPeriod.classList.add('select');
+  //   buttonCountriesToday.classList.remove('select');
+  // } else if (event.target === buttonCountriesToday) {
+  //   state.allPeriod = false;
+  //   buttonCountriesAllPeriod.classList.remove('select');
+  //   buttonCountriesToday.classList.add('select');
+  // } else if (event.target === buttonCountriesAbs) {
+  //   state.absValue = true;
+  //   buttonCountriesAbs.classList.add('select');
+  //   buttonCountriesPerPopulation.classList.remove('select');
+  // } else if (event.target === buttonCountriesPerPopulation) {
+  //   state.absValue = false;
+  //   buttonCountriesAbs.classList.remove('select');
+  //   buttonCountriesPerPopulation.classList.add('select');
+  // } else if (event.target === buttonCountriesConfirmed) {
+  //   state.confirmed = true;
+  //   state.recovered = false;
+  //   state.deaths = false;
+  //   buttonCountriesConfirmed.classList.add('select');
+  //   buttonCountriesRecovered.classList.remove('select');
+  //   buttonCountriesDeaths.classList.remove('select');
+  // } else if (event.target === buttonCountriesRecovered) {
+  //   state.confirmed = false;
+  //   state.recovered = true;
+  //   state.deaths = false;
+  //   buttonCountriesConfirmed.classList.remove('select');
+  //   buttonCountriesRecovered.classList.add('select');
+  //   buttonCountriesDeaths.classList.remove('select');
+  // } else if (event.target === buttonCountriesDeaths) {
+  //   state.confirmed = false;
+  //   state.recovered = false;
+  //   state.deaths = true;
+  //   buttonCountriesConfirmed.classList.remove('select');
+  //   buttonCountriesRecovered.classList.remove('select');
+  //   buttonCountriesDeaths.classList.add('select');
+  // }
 
   const array = [];
   const tableDisplayData = state.dataCountryInfo;
@@ -119,6 +121,6 @@ const sortCountryDataByClick = (event) => {
   createTable(array);
 };
 
-document.querySelector('.data__wrap').addEventListener('click', (event) => sortCountryDataByClick(event));
+// document.querySelector('.data__wrap').addEventListener('click', (event) => sortCountryDataByClick(event));
 
-export { sortCountryDataByDefault };
+export { sortCountryDataByDefault, sortCountryDataByClick };

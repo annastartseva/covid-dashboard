@@ -1,4 +1,7 @@
+import { searchCountries } from './search';
+
 const createTable = (dataForCreation) => {
+  console.log('create table:');
   if (document.querySelector('#countries__table')) {
     document.querySelector('#countries__table').remove();
   }
@@ -9,6 +12,7 @@ const createTable = (dataForCreation) => {
   const wrapper = document.querySelector('.wrap.table__city-list-wrap');
 
   const searchField = document.createElement('input');
+  searchField.setAttribute("list", "menu");
   searchField.id = 'search__field';
   wrapper.appendChild(searchField);
 
@@ -45,6 +49,7 @@ const createTable = (dataForCreation) => {
     flagImage.src = element.flag;
     cellWithFlag.appendChild(flagImage);
   });
+  searchCountries(dataForCreation);
 };
 
 export { createTable };

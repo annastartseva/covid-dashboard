@@ -6,6 +6,10 @@ let map = '';
 let layerGroup = '';
 let info = '';
 let infoDiv = '';
+let legend = '';
+let legendDiv = '';
+let urlSize = '';
+const grades = [1, 10000, 200000, 500000, 1000000, 3000000];
 
 const createMap = () => {
   const mapOptions = {
@@ -13,6 +17,7 @@ const createMap = () => {
     zoom: 2,
     worldCopyJump: true,
     attributionControl: false,
+    minZoom: 2,
   };
 
   map = new L.map('map', mapOptions);
@@ -107,6 +112,52 @@ const removeMarkerOnMap = () => {
   map.removeLayer(layerGroup);
 };
 
+const removeLegend = () => {
+  if (legendDiv.firstChild) {
+    while (legendDiv.firstChild) {
+      legendDiv.removeChild(legendDiv.firstChild);
+    }
+  }
+};
+
+const changeLegend = () => {
+  for (let i = 0; i < grades.length; i += 1) {
+    urlSize = typeOfMarker(grades[i] + 10);
+    legendDiv.innerHTML +=
+      `<div class ="legend_string">
+      <div class="legend_img" >
+      <img src="${urlSize.iconUrl}" alt="icon_circle" 
+      width="${urlSize.iconSize[0]}" height="${urlSize.iconSize[0]}"></div> 
+      <div class ="legend_text">` + grades[i].toLocaleString() + (grades[i + 1] ? '&ndash;'
+        + grades[i + 1].toLocaleString() : '+' + '</div></div>');
+  }
+}
+
+const createLegend = () => {
+
+  legend = L.control({ position: 'bottomleft' });
+
+  legend.onAdd = () => {
+    legendDiv = L.DomUtil.create('div', 'info legend');
+
+    for (let i = 0; i < grades.length; i++) {
+      urlSize = typeOfMarker(grades[i] + 10);
+      legendDiv.innerHTML +=
+        `<div class ="legend_string">
+        <div class="legend_img" >
+        <img src="${urlSize.iconUrl}" alt="icon_circle" 
+        width="${urlSize.iconSize[0]}" height="${urlSize.iconSize[0]}"></div> 
+        <div class ="legend_text">` + grades[i].toLocaleString() + (grades[i + 1] ? '&ndash;'
+          + grades[i + 1].toLocaleString() : '+' + '</div></div>');
+    }
+    console.log('legendDiv ', legendDiv);
+    return legendDiv;
+  };
+
+  legend.addTo(map);
+
+};
+
 const typeOfMarker = (caseNumber) => {
   let iconOptions = '';
   let iconSizeItem = '';
@@ -182,7 +233,10 @@ const addMarkerOnMap = () => {
     }
   });
   layerGroup = L.layerGroup(oneLayer);
-  layerGroup.addTo(map);
+  layerGroup.addTo(map); 
+  //createLegend();
+  //legend.update();
+  //changeLegend();
 };
 
-export { createMap, addMarkerOnMap, removeMarkerOnMap, addCountryContur };
+export { createMap, addMarkerOnMap, createLegend, removeMarkerOnMap, addCountryContur, changeLegend, removeLegend };

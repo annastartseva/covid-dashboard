@@ -1,5 +1,5 @@
 import { setDataAllPeriodForGlobalTable } from './globalTable';
-import { createMap, addMarkerOnMap, addCountryContur } from './map';
+import { createMap, addMarkerOnMap, addCountryContur, createLegend } from './map';
 import { createDataStructure } from './dataStructuring';
 
 // const url
@@ -25,7 +25,9 @@ async function getDataByCountry() {
   const countriesDataInJSON = await fetch(urlByCountry);
   state.dataCountryInfo = await countriesDataInJSON.json();
   // console.log('state.dataCountryInfo: ', state.dataCountryInfo);
-  addMarkerOnMap();
+	addMarkerOnMap();
+	createLegend();
+	createDataStructure(state.dataCountryInfo);
 }
 
 async function getSummaryGlobalData() {
@@ -33,8 +35,7 @@ async function getSummaryGlobalData() {
   const res = await fetch(urlSummary);
   state.dataCovid = await res.json();
   // console.log('state.dataCovid: ', state.dataCovid);
-  setDataAllPeriodForGlobalTable(state.dataCovid);
-  createDataStructure(state.dataCountryInfo);
+	setDataAllPeriodForGlobalTable(state.dataCovid);
 }
 
 async function getGeoJsonData() {

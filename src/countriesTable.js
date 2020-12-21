@@ -2,23 +2,26 @@ import { searchCountries } from './search';
 
 const createTable = (dataForCreation) => {
   console.log('create table:');
-  if (document.querySelector('#countries__table')) {
-    document.querySelector('#countries__table').remove();
+	if (document.querySelector('#table__wrapper')) {
+		document.querySelector('#table__wrapper').remove();
   }
   if (document.querySelector('#search__field')) {
     document.querySelector('#search__field').remove();
   }
 
-  const wrapper = document.querySelector('.wrap.table__city-list-wrap');
+	const wrapper = document.querySelector('.countries__table-wrap');
 
   const searchField = document.createElement('input');
   searchField.setAttribute('list', 'menu');
   searchField.id = 'search__field';
   wrapper.appendChild(searchField);
 
+	const tableWrapper = document.createElement('div');
+	tableWrapper.id = 'table__wrapper';
   const table = document.createElement('table');
-  table.id = 'countries__table';
-  wrapper.appendChild(table);
+	table.id = 'countries__table';
+	tableWrapper.appendChild(table);
+	wrapper.appendChild(tableWrapper);
 
   const title = document.createElement('caption');
   title.id = 'countries__table-title';

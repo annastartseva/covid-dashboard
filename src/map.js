@@ -4,50 +4,120 @@ import { state } from './main';
 
 let map = '';
 let layerGroup = '';
+let info = '';
+let infoDiv = '';
 
 const createMap = () => {
   const mapOptions = {
     center: [26.745610382199022, 22.148437500000004],
     zoom: 2,
     worldCopyJump: true,
+    attributionControl: false,
   };
 
   map = new L.map('map', mapOptions);
-  // var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
   const layer = new L.TileLayer('https://api.mapbox.com/styles/v1/spokoinaya/ckiuh90qt2vig19pf9727arzf/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic3Bva29pbmF5YSIsImEiOiJja2l1Y2l6dWkwN2p1MnJwNHlmNG1lcTlwIn0.rqGaVERCjrMCex1b5rss4w');
-
   map.addLayer(layer);
+};
+
+const addCountryContur = () => {
+  const geoJsonData = state.dataGeoJson;
+  const myStyle = {
+    color: '#353535',
+    weight: 0,
+    opacity: 0.4,
+    dashArray: 3,
+    fillColor: '#353535',
+    fillOpacity: 0.1,
+  };
+  L.geoJSON(geoJsonData, {
+    style: myStyle,
+    onEachFeature: onEachFeatureFunc,
+  }).addTo(map);
+  createInfoPopup();
+};
+
+const createTooltipText = (iso) => {
+  // console.log('function createTooltipText');
+  // console.log('iso ', iso);
+  const data = state.dataCountryInfo;
+  const countryId = data.map((item) => item.countryInfo.iso2);
+  const idCountryId = countryId.indexOf(iso);
+  // console.log('idCountryId ', idCountryId);
+  const tooltipText = selectVariable();
+  const numberCase = state.dataCountryInfo[idCountryId].[tooltipText[0]];
+  // console.log('numberCase ', numberCase);
+  const country = state.dataCountryInfo[idCountryId].country;
+  return [numberCase, country, tooltipText[1]];
+};
+
+const createInfoPopup = () => {
+  info = L.control();
+
+  info.onAdd = () => {
+    infoDiv = L.DomUtil.create('div', 'info');
+    infoDiv.innerHTML = '<h4>Covid Information</h4> Hover over a country';
+    return infoDiv;
+  };
+
+  info.update = (iso) => {
+    const data = createTooltipText(iso);
+    infoDiv.innerHTML = `<h4>Covid Information</h4>${data[1]} =>  ${data[2]}:  ${data[0].toLocaleString()}`;
+  };
+
+  info.addTo(map);
+};
+
+const highlightFeature = (e) => {
+  const layer = e.target;
+  // console.log('e ', e);
+  // console.log('e ', e.sourceTarget.feature.properties);
+
+  layer.setStyle({
+    weight: 1,
+    color: '#858585',
+    fillOpacity: 0.4,
+  });
+
+  info.update(e.sourceTarget.feature.properties.iso_a2);
+
+  if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+    layer.bringToFront();
+  }
+};
+
+const resetHighlight = (e) => {
+  const layer = e.target;
+
+  layer.setStyle({
+    color: '#353535',
+    weight: 0,
+    fillOpacity: 0.1,
+  });
+};
+
+const onEachFeatureFunc = (feature, layer) => {
+  layer.on({
+    mouseover: highlightFeature,
+    mouseout: resetHighlight,
+  });
 };
 
 const removeMarkerOnMap = () => {
   map.removeLayer(layerGroup);
 };
 
-const addMarkerOnMap = () => {
-  let markerOne = '';
-  let oneLayer = [];
-
-  state.dataCountryInfo.forEach(item => {
-    const iconOptions = typeOfMarker(item.cases);
-  const customIcon = L.icon(iconOptions);
-    const coordinates = [item.countryInfo.lat, item.countryInfo.long];
-  const markerOptions = {
-    title: `${item.country}, Total Confirmed: ${item.cases}`,
-    riseOnHover: true,
-    icon: customIcon,
-  };
-    markerOne = L.marker(coordinates, markerOptions);
-    //L.marker(coordinates, markerOptions).addTo(map);
-    oneLayer.push(markerOne);
-  });
-  console.log('oneLayer ', oneLayer);
-  layerGroup = L.layerGroup(oneLayer);
-  layerGroup.addTo(map);
-};
-
 const typeOfMarker = (caseNumber) => {
   let iconOptions = '';
   let iconSizeItem = '';
+  let iconUrlVariable = '';
+  if (state.confirmed === true) {
+    iconUrlVariable = './assets/images/circle.png';
+  } else if (state.recovered === true) {
+    iconUrlVariable = './assets/images/marker_recover.png';
+  } else if (state.deaths === true) {
+    iconUrlVariable = './assets/images/marker_deaths.png';
+  }
   if (caseNumber <= 10000) {
     iconSizeItem = [10, 10];
   } else if (caseNumber > 10000 && caseNumber <= 200000) {
@@ -62,10 +132,57 @@ const typeOfMarker = (caseNumber) => {
     iconSizeItem = [30, 30];
   }
   iconOptions = {
-    iconUrl: './assets/images/circle.png',
+    iconUrl: iconUrlVariable,
     iconSize: iconSizeItem,
   };
   return iconOptions;
 };
 
-export { createMap, addMarkerOnMap, removeMarkerOnMap };
+const selectVariable = () => {
+  let data = '';
+  if (state.allPeriod === true) {
+    if (state.confirmed === true) {
+      data = ['cases', 'Total Confirmed'];
+    } else if (state.recovered === true) {
+      data = ['recovered', 'Total Recovered'];
+    } else if (state.deaths === true) {
+      data = ['deaths', 'Total Deaths'];
+    }
+  } else {
+    if (state.confirmed === true) {
+      data = ['todayCases', 'Today Confirmed'];
+    } else if (state.recovered === true) {
+      data = ['todayRecovered', 'Today Recovered'];
+    } else if (state.deaths === true) {
+      data = ['todayDeaths', 'Today Deaths'];
+    }
+  }
+  return data;
+};
+
+const addMarkerOnMap = () => {
+  let markerOne = '';
+  const oneLayer = [];
+  const displayedData = selectVariable();
+  const displayedNumber = displayedData[0];
+  const displayedReason = displayedData[1];
+
+  state.dataCountryInfo.forEach((item) => {
+    if (item[displayedNumber] > 0) {
+      const iconOptions = typeOfMarker(item[displayedNumber]);
+      const customIcon = L.icon(iconOptions);
+      const coordinates = [item.countryInfo.lat, item.countryInfo.long];
+      const markerOptions = {
+        title: `${item.country}, ${displayedReason}: ${item[displayedNumber].toLocaleString()}`,
+        riseOnHover: true,
+        icon: customIcon,
+      };
+      markerOne = L.marker(coordinates, markerOptions);
+      oneLayer.push(markerOne);
+    }
+  });
+  layerGroup = L.layerGroup(oneLayer);
+  layerGroup.addTo(map);
+};
+
+export { createMap, addMarkerOnMap, removeMarkerOnMap, addCountryContur };

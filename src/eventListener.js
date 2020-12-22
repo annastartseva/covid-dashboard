@@ -1,5 +1,5 @@
 import { state } from './main';
-import { setDataAllPeriodForGlobalTable, setDataTodayForGlobalTable } from './globalTable';
+import { setDataAllPeriodForGlobalTable, setDataTodayForGlobalTable, changeInfoByClickOnMap } from './globalTable';
 import { sortCountryDataByClick } from './dataSort';
 import { removeMarkerOnMap, addMarkerOnMap, changeLegend, removeLegend } from './map';
 import { searchProcess } from './search';
@@ -9,9 +9,10 @@ const buttonSummaryAllPeriod = document.querySelector('.button__all-period');
 const buttonSummaryToday = document.querySelector('.button__last-day');
 const buttonSummaryAbs = document.querySelector('.button__abs');
 const buttonSummaryPerPopulation = document.querySelector('.button__per-population');
-const totalConfirmed = document.querySelector('#total_confirm');
-const totalRecover = document.querySelector('#total_recover');
-const totalDeaths = document.querySelector('#total_deaths');
+//const totalConfirmed = document.querySelector('#total_confirm');
+//const totalRecover = document.querySelector('#total_recover');
+//const totalDeaths = document.querySelector('#total_deaths');
+const buttonGlobalCase = document.querySelector('.button__summery-global');
 
 // Table Countries
 const buttonCountriesAllPeriod = document.querySelector('.button__all-period-countries');
@@ -95,12 +96,16 @@ const buttonDeathAddSelect = () => {
 };
 
 const setDataToAllElement = () => {
-  console.log('function setDataToAllElement');
-  if (state.allPeriod === true) {
-    setDataAllPeriodForGlobalTable(state.dataCovid);
-  } else if (state.allPeriod === false) {
-    setDataTodayForGlobalTable(state.dataCovid);
-  }
+	console.log('function setDataToAllElement');
+	if (state.allWorld === true) {
+		if (state.allPeriod === true) {
+			setDataAllPeriodForGlobalTable(state.dataCovid);
+		} else if (state.allPeriod === false) {
+			setDataTodayForGlobalTable(state.dataCovid);
+		}
+	} else {
+		changeInfoByClickOnMap();
+	}  
   // console.log('state ', state);
 };
 
@@ -119,19 +124,20 @@ const functionForChangeInfoSecond = () => {
 };
 
 const changeDataInAllModules = (event) => {
+	console.log('state.allWorld ', state.allWorld);
   if (event.target === buttonCountriesAllPeriod
     || event.target === buttonMapAllPeriod
     || event.target === buttonSummaryAllPeriod) {
     state.allPeriod = true;
     buttonAllPeriodAddSelect();
-    setDataAllPeriodForGlobalTable(state.dataCovid);
+		setDataToAllElement();
     functionForChangeInfo();
   } else if (event.target === buttonCountriesToday
     || event.target === buttonSummaryToday
     || event.target === buttonMapToday) {
     state.allPeriod = false;
     buttonTodaySelect();
-    setDataTodayForGlobalTable(state.dataCovid);
+		setDataToAllElement();
     functionForChangeInfo();
   } else if (event.target === buttonSummaryAbs
     || event.target === buttonCountriesAbs
@@ -166,7 +172,10 @@ const changeDataInAllModules = (event) => {
     state.deaths = true;
     buttonDeathAddSelect();
     functionForChangeInfoSecond();
-  }
+	} else if (event.target === buttonGlobalCase) {
+		state.allWorld = true;
+		setDataToAllElement();
+	}
   console.log('event ', event);
 };
 

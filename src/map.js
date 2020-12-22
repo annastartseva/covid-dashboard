@@ -1,6 +1,7 @@
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { state } from './main';
+import { changeInfoByClickOnMap } from './globalTable';
 
 let map = '';
 let layerGroup = '';
@@ -23,54 +24,6 @@ const createMap = () => {
   map = new L.map('map', mapOptions);
   const layer = new L.TileLayer('https://api.mapbox.com/styles/v1/spokoinaya/ckiuh90qt2vig19pf9727arzf/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic3Bva29pbmF5YSIsImEiOiJja2l1Y2l6dWkwN2p1MnJwNHlmNG1lcTlwIn0.rqGaVERCjrMCex1b5rss4w');
   map.addLayer(layer);
-};
-
-const addCountryContur = () => {
-  const geoJsonData = state.dataGeoJson;
-  const myStyle = {
-    color: '#353535',
-    weight: 0,
-    opacity: 0.4,
-    dashArray: 3,
-    fillColor: '#353535',
-    fillOpacity: 0.1,
-  };
-  L.geoJSON(geoJsonData, {
-    style: myStyle,
-    onEachFeature: onEachFeatureFunc,
-  }).addTo(map);
-  createInfoPopup();
-};
-
-const createTooltipText = (iso) => {
-  // console.log('function createTooltipText');
-  // console.log('iso ', iso);
-  const data = state.dataCountryInfo;
-  const countryId = data.map((item) => item.countryInfo.iso2);
-  const idCountryId = countryId.indexOf(iso);
-  // console.log('idCountryId ', idCountryId);
-  const tooltipText = selectVariable();
-  const numberCase = state.dataCountryInfo[idCountryId].[tooltipText[0]];
-  // console.log('numberCase ', numberCase);
-  const country = state.dataCountryInfo[idCountryId].country;
-  return [numberCase, country, tooltipText[1]];
-};
-
-const createInfoPopup = () => {
-  info = L.control();
-
-  info.onAdd = () => {
-    infoDiv = L.DomUtil.create('div', 'info');
-    infoDiv.innerHTML = '<h4>Covid Information</h4> Hover over a country';
-    return infoDiv;
-  };
-
-  info.update = (iso) => {
-    const data = createTooltipText(iso);
-    infoDiv.innerHTML = `<h4>Covid Information</h4>${data[1]} =>  ${data[2]}:  ${data[0].toLocaleString()}`;
-  };
-
-  info.addTo(map);
 };
 
 const highlightFeature = (e) => {
@@ -105,7 +58,63 @@ const onEachFeatureFunc = (feature, layer) => {
   layer.on({
     mouseover: highlightFeature,
     mouseout: resetHighlight,
+    click: getCountryId,
   });
+};
+
+const addCountryContur = () => {
+  const geoJsonData = state.dataGeoJson;
+  const myStyle = {
+    color: '#353535',
+    weight: 0,
+    opacity: 0.4,
+    dashArray: 3,
+    fillColor: '#353535',
+    fillOpacity: 0.1,
+  };
+  L.geoJSON(geoJsonData, {
+    style: myStyle,
+    onEachFeature: onEachFeatureFunc,
+  }).addTo(map);
+  createInfoPopup();
+};
+
+const createTooltipText = (iso) => {
+  // console.log('function createTooltipText');
+  // console.log('iso ', iso);
+  const data = state.dataCountryInfo;
+  const countryId = data.map((item) => item.countryInfo.iso2);
+  const idCountryId = countryId.indexOf(iso);
+  // console.log('idCountryId ', idCountryId);
+  const tooltipText = selectVariable();
+  const numberCase = state.dataCountryInfo[idCountryId][tooltipText[0]];
+  // console.log('numberCase ', numberCase);
+  const country = state.dataCountryInfo[idCountryId].country;
+  return [numberCase, country, tooltipText[1]];
+};
+
+const createInfoPopup = () => {
+  info = L.control();
+
+  info.onAdd = () => {
+    infoDiv = L.DomUtil.create('div', 'info');
+    infoDiv.innerHTML = '<h4>Covid Information</h4> Hover over a country';
+    return infoDiv;
+  };
+
+  info.update = (iso) => {
+    const data = createTooltipText(iso);
+    infoDiv.innerHTML = `<h4>Covid Information</h4>${data[1]} =>  ${data[2]}:  ${data[0].toLocaleString()}`;
+  };
+
+  info.addTo(map);
+};
+
+const getCountryId = (e) => {
+  state.countryId = e.sourceTarget.feature.properties.iso_a2;
+  console.log('state.countryId ', state.countryId);
+  state.allWorld = false;
+  changeInfoByClickOnMap();
 };
 
 const removeMarkerOnMap = () => {
@@ -134,7 +143,6 @@ const changeLegend = () => {
 }
 
 const createLegend = () => {
-
   legend = L.control({ position: 'bottomleft' });
 
   legend.onAdd = () => {
@@ -155,7 +163,6 @@ const createLegend = () => {
   };
 
   legend.addTo(map);
-
 };
 
 const typeOfMarker = (caseNumber) => {
@@ -230,6 +237,13 @@ const addMarkerOnMap = () => {
       };
       markerOne = L.marker(coordinates, markerOptions);
       oneLayer.push(markerOne);
+
+      markerOne.on("click", function () {
+        state.countryId = item.countryInfo.iso2;
+        console.log('state.countryId ', state.countryId);
+        state.allWorld = false;
+        changeInfoByClickOnMap();
+      })
     }
   });
   layerGroup = L.layerGroup(oneLayer);

@@ -1,7 +1,9 @@
 import { searchCountries } from './search';
+import { state } from './main';
 
 const createTable = (dataForCreation) => {
-  console.log('create table:');
+  state.dataList = dataForCreation;
+  console.log('datalist:', state.dataList, state.dataCountryInfoDates);
   if (document.querySelector('#table__wrapper')) {
     document.querySelector('#table__wrapper').remove();
   }

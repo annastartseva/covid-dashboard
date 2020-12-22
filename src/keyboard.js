@@ -1,4 +1,5 @@
-import { searchProcess } from './search';
+import { state } from './main';
+import { searchProcess, searchCountries } from './search';
 
 const language = {
   ru: [
@@ -716,7 +717,6 @@ class Keyboard {
 
   init(langCode) {
     this.keyBase = language[langCode];
-    console.log("Checkout:", document.querySelector('#search__field'));
     
     this.output = document.querySelector('#search__field');
     // this.output = create('textarea', 'output', null, keyboardWrapper,
@@ -1021,6 +1021,9 @@ class Keyboard {
             cursorPos -= 1;
           }
           this.output.setSelectionRange(cursorPos, cursorPos);
+          searchProcess(null, this.output.value);
+          if (this.output.value === '') {
+          }
         },
         Space: () => {
           if (this.container.dataset.language === 'en') {
@@ -1040,6 +1043,7 @@ class Keyboard {
         cursorPos += 1;
         this.output.value = `${left}${symbol || ''}${right}`;
         this.output.setSelectionRange(cursorPos, cursorPos);
+        searchProcess(null, this.output.value);
       }
     }
   }

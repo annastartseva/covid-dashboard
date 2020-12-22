@@ -1,4 +1,5 @@
 import { state } from './main';
+import { changeInfoByClickOnMap } from './globalTable';
 
 const searchProcess = () => {
   if (document.querySelector('.menu')) {
@@ -13,6 +14,11 @@ const searchProcess = () => {
   wrapper.appendChild(select);
 
   searchList.forEach((element, index) => {
+    if (input.value.length === element.name.length && element.name.toUpperCase().startsWith(input.value.toUpperCase()) && element.name.toUpperCase().endsWith(input.value.toUpperCase())) {
+      state.countryId = element.iso;
+      state.allWorld = false;
+	    changeInfoByClickOnMap();
+    }
     if (element.name.toUpperCase().startsWith(input.value.toUpperCase())) {
       const option = document.createElement('div');
       option.classList.add('menu-option');

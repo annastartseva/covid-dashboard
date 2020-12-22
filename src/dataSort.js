@@ -23,7 +23,7 @@ const sortCountryDataByDefault = () => {
       name: element.country,
       flag: element.countryInfo.flag,
       id: element.countryInfo._id,
-      iso: element.countryInfo.iso3,
+      iso: element.countryInfo.iso2,
     };
     array.push(obj);
   });

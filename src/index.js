@@ -8,3 +8,4 @@ import './countriesTable';
 import './eventListener';
 import './search';
 import './keyboard';
+import './chartTable';

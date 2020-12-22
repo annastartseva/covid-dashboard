@@ -294,14 +294,14 @@ button:focus {
 	align-items: center;
 	font-family: 'Roboto', sans-serif;
     font-weight: bold;
-		color: rgb(255, 254, 254);
-		font-size: 1.5rem;	
+    color: rgb(255, 254, 254);
+    font-size: 1.5rem;	
 }
 
 .table__city-list-wrap {
     width: 25%;
-		height: 600px;
-		margin: 0.5rem;	
+    height: 606px;
+    margin: 0.5rem;
 }
 
 .countries__table-wrap {
@@ -322,11 +322,47 @@ button:focus {
 
 #search__field {
     position: sticky;
-		top: 0;
-		width: 99%;
-		margin: 0.2rem auto;
-		background: #181818;
-		color: white;
+    top: 0;
+    width: 99%;
+    margin: 0.2rem auto;
+    background: #181818;
+    color: white;
+}
+
+.menu {
+    display: none;
+    max-height: 535px;
+    position: absolute;
+    background-color: white;
+    top: 30%;
+    color: black;
+    width: inherit;
+    overflow: auto;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+}
+
+.menu-option {
+    cursor: pointer;
+    padding: 10px 0;
+    color: white;
+}
+
+.menu-option:hover {
+    background-color: rgb(160, 4, 4);
+	/* color: rgb(160, 4, 4); */
+}
+
+.show {
+    display: block;
+}
+
+.dark {
+    background-color: rgba(14, 13, 13);
+}
+
+.black {
+    background-color: black;
 }
 
 .flag-image {

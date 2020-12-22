@@ -2,6 +2,8 @@ import { setDataAllPeriodForGlobalTable } from './globalTable';
 import { createMap, addMarkerOnMap, addCountryContur, createLegend } from './map';
 import { createDataStructure } from './dataStructuring';
 
+const dataUpdate = document.querySelector('.actual__data');
+
 // const url
 const urlSummary = 'https://disease.sh/v3/covid-19/all';
 const urlByCountry = 'https://disease.sh/v3/covid-19/countries';
@@ -24,7 +26,7 @@ async function getDataByCountry() {
   // console.log('function getDataByCountry');
   const countriesDataInJSON = await fetch(urlByCountry);
   state.dataCountryInfo = await countriesDataInJSON.json();
-	console.log('state.dataCountryInfo: ', state.dataCountryInfo);
+  console.log('state.dataCountryInfo: ', state.dataCountryInfo);
   addMarkerOnMap();
   createLegend();
   createDataStructure(state.dataCountryInfo);
@@ -34,7 +36,9 @@ async function getSummaryGlobalData() {
   // console.log('function getSummaryGlobalData');
   const res = await fetch(urlSummary);
   state.dataCovid = await res.json();
-  // console.log('state.dataCovid: ', state.dataCovid);
+  const createDataUpdate = new Date(state.dataCovid.updated);
+  dataUpdate.innerHTML = `Last Update <br> ${createDataUpdate}`;
+  console.log('state.dataCovid: ', state.dataCovid);
   setDataAllPeriodForGlobalTable(state.dataCovid);
 }
 

@@ -21,31 +21,38 @@
   <main>
     <div class="data__wrap">
       <div class="first__column-wrap">
-        <div class="wrap table__summery-wrap">
-          <h2 class="table__summery-title">Global Cases</h2>
-
+				<div class="wrap table__summery-wrap">
+					
+					
           <div class="button__wrap">
             <button class="button__all-period button select">ALL PERIOD</button>
             <button class="button__last-day button">TODAY</button>
             <button class="button__abs button button_margin select">ABS</button>
-            <button class="button__per-population button">PER 100K</button>
-
-          </div>
-          <div class="table__summery-data">
-            <div class="table__summery-data-title ">Total Confirmed</div>
-            <div class="table__summery-data-number" id="total_confirm"></div>
-          </div>
-          <div class="table__summery-data">
-            <div class="table__summery-data-title">Total Recovered</div>
-            <div class="table__summery-data-number" id="total_recover"></div>
-          </div>
-          <div class="table__summery-data">
-            <div class="table__summery-data-title">Total Deaths</div>
-            <div class="table__summery-data-number" id="total_deaths"></div>
-          </div>
-        </div>
-        <div class="wrap chart-wrap">chart
-          <div class="button__wrap">
+						<button class="button__per-population button">PER 100K</button>
+					</div>
+					<div class="table__summery-data-wrap">
+						<div class="table__summery-data">
+							<div class="table__summery-data-title ">Total Confirmed</div>
+							<div class="table__summery-data-number" id="total_confirm"></div>
+						</div>
+						<div class="table__summery-data">
+							<div class="table__summery-data-title">Total Recovered</div>
+							<div class="table__summery-data-number" id="total_recover"></div>
+						</div>
+						<div class="table__summery-data">
+							<div class="table__summery-data-title">Total Deaths</div>
+							<div class="table__summery-data-number" id="total_deaths"></div>
+						</div>
+					</div>
+				</div>
+				<div class="table__summery-title">
+					<button class="button__summery-global">GLOBAL CASES</button>
+				</div>
+				<div class="actual__data wrap">
+				
+				</div>
+				<div class="wrap chart-wrap">
+				  <div class="button__wrap">
             <button class="button__all-period-chart button select">ALL PERIOD</button>
             <button class="button__last-day-chart button">TODAY</button>
             <button class="button__abs-chart button button_margin select">ABS</button>
@@ -62,19 +69,22 @@
           </div>
         </div>
       </div>
-
-      <div class="wrap map__data-wrap">
-        <div class="button__wrap">
-          <button class="button__all-period-map button select">ALL PERIOD</button>
-          <button class="button__last-day-map button">TODAY</button>
-          <button class="button__abs-map button button_margin select">ABS</button>
-          <button class="button__per-population-map button">PER 100K</button>
-          <button class="button__confirmed-map button button_margin select">CONFIRMED</button>
-          <button class="button__recovered-map button">RECOVERED</button>
-          <button class="button__deaths-map button">DEATHS</button>
-        </div>
-        <div class="map__data" id="map"></div>
-      </div>
+<div class="second__column-wrap">
+	<div class="map__country">ALL WORLD</div>
+	<div class="wrap map__data-wrap">
+				
+		<div class="button__wrap">
+			<button class="button__all-period-map button select">ALL PERIOD</button>
+			<button class="button__last-day-map button">TODAY</button>
+			<button class="button__abs-map button button_margin select">ABS</button>
+			<button class="button__per-population-map button">PER 100K</button>
+			<button class="button__confirmed-map button button_margin select">CONFIRMED</button>
+			<button class="button__recovered-map button">RECOVERED</button>
+			<button class="button__deaths-map button">DEATHS</button>
+		</div>
+		<div class="map__data" id="map"></div>
+	</div>
+</div>
 
       <div class="wrap table__city-list-wrap">
         <div class="button__wrap">

@@ -29,7 +29,7 @@ async function getDataByCountry() {
   // console.log('function getDataByCountry');
   const countriesDataInJSON = await fetch(urlByCountry);
   state.dataCountryInfo = await countriesDataInJSON.json();
-  // console.log('state.dataCountryInfo: ', state.dataCountryInfo);
+	console.log('state.dataCountryInfo: ', state.dataCountryInfo);
   addMarkerOnMap();
   createLegend();
   createDataStructure(state.dataCountryInfo);

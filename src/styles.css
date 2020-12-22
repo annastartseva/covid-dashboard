@@ -333,6 +333,22 @@ button:focus {
     width: 20px;
 }
 
+.keyboard {
+    display: grid;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    transition: 1s linear;
+    font-size: 18px;
+    left: 0;
+    bottom: 0;
+}
+
+.keyboard__row {
+    grid-template-columns: repeat(13, 1fr);
+    display: grid;
+}
+
 /* footer */
 .footer {
     width: 85%;

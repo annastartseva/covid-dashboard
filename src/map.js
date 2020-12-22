@@ -233,10 +233,7 @@ const addMarkerOnMap = () => {
     }
   });
   layerGroup = L.layerGroup(oneLayer);
-  layerGroup.addTo(map); 
-  //createLegend();
-  //legend.update();
-  //changeLegend();
+  layerGroup.addTo(map);   
 };
 
 export { createMap, addMarkerOnMap, createLegend, removeMarkerOnMap, addCountryContur, changeLegend, removeLegend };

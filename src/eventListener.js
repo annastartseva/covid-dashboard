@@ -2,6 +2,7 @@ import { state } from './main';
 import { setDataAllPeriodForGlobalTable, setDataTodayForGlobalTable } from './globalTable';
 import { sortCountryDataByClick } from './dataSort';
 import { removeMarkerOnMap, addMarkerOnMap, changeLegend, removeLegend } from './map';
+import { searchProcess } from './search';
 
 // Table Global Case
 const buttonSummaryAllPeriod = document.querySelector('.button__all-period');
@@ -87,7 +88,7 @@ const buttonRecoverAddSelect = () => {
 const buttonDeathAddSelect = () => {
   buttonCountriesConfirmed.classList.remove('select');
   buttonMapConfirmed.classList.remove('select');
-  buttonCountriesRecovered.classList.remove('select');  
+  buttonCountriesRecovered.classList.remove('select');
   buttonMapRecovered.classList.remove('select');
   buttonCountriesDeaths.classList.add('select');
   buttonMapDeaths.classList.add('select');
@@ -147,7 +148,7 @@ const changeDataInAllModules = (event) => {
     setDataToAllElement();
     functionForChangeInfo();
   } else if (event.target === buttonCountriesConfirmed
-    || event.target === buttonMapConfirmed) {    
+    || event.target === buttonMapConfirmed) {
     state.confirmed = true;
     state.recovered = false;
     state.deaths = false;
@@ -169,4 +170,5 @@ const changeDataInAllModules = (event) => {
   console.log('event ', event);
 };
 
+document.querySelector('#search__field').addEventListener('input', searchProcess);
 document.querySelector('.data__wrap').addEventListener('click', (event) => changeDataInAllModules(event));

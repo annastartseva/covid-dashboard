@@ -25,9 +25,9 @@ async function getDataByCountry() {
   const countriesDataInJSON = await fetch(urlByCountry);
   state.dataCountryInfo = await countriesDataInJSON.json();
   // console.log('state.dataCountryInfo: ', state.dataCountryInfo);
-	addMarkerOnMap();
-	createLegend();
-	createDataStructure(state.dataCountryInfo);
+  addMarkerOnMap();
+  createLegend();
+  createDataStructure(state.dataCountryInfo);
 }
 
 async function getSummaryGlobalData() {
@@ -35,7 +35,7 @@ async function getSummaryGlobalData() {
   const res = await fetch(urlSummary);
   state.dataCovid = await res.json();
   // console.log('state.dataCovid: ', state.dataCovid);
-	setDataAllPeriodForGlobalTable(state.dataCovid);
+  setDataAllPeriodForGlobalTable(state.dataCovid);
 }
 
 async function getGeoJsonData() {

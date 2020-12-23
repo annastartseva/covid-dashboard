@@ -3,7 +3,7 @@ import { state } from './main';
 
 const createTable = (dataForCreation) => {
   state.dataList = dataForCreation;
-  console.log('datalist:', state.dataList, state.dataCountryInfoDates);
+  console.log('datalist:', state.dataList, state);
   if (document.querySelector('#table__wrapper')) {
     document.querySelector('#table__wrapper').remove();
   }

@@ -10,37 +10,37 @@ const config = {
       data: [],
       backgroundColor: 'rgba(255, 99, 132, 0.2)',
       borderColor: 'rgba(255, 99, 132, 1)',
-      borderWidth: 1
-    }]
+      borderWidth: 1,
+    }],
   },
   options: {
     legend: {
       display: true,
       labels: {
-        fontColor: 'rgb(255, 99, 132)'
-      }
+        fontColor: 'rgb(255, 99, 132)',
+      },
     },
     tooltips: {
       callbacks: {
-        labelColor: function(tooltipItem, chart) {
+        labelColor: function (tooltipItem, chart) {
           return {
             borderColor: 'rgb(255, 0, 0)',
-            backgroundColor: 'rgb(255, 0, 0)'
+            backgroundColor: 'rgb(255, 0, 0)',
           };
         },
-        labelTextColor: function(tooltipItem, chart) {
+        labelTextColor: function (tooltipItem, chart) {
           return '#543453';
-        }
-      }
+        },
+      },
     },
     scales: {
       yAxes: [{
         ticks: {
-          beginAtZero: true
-        }
-      }]
-    }
-  }
+          beginAtZero: true,
+        },
+      }],
+    },
+  },
 };
 
 const createChart = (outputData) => {
@@ -51,14 +51,10 @@ const createChart = (outputData) => {
   });
   console.log(config.data.labels[0]);
   const myChart = new Chart(ctx, config);
-}
-
-
+};
 
 // config.data.datasets[0].backgroundColor = 'blue';
 
 document.querySelector('.button__recovered-chart').addEventListener('click', () => myChart.update());
-
-console.log(config);
 
 export { createChart };

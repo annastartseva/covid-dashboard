@@ -1,5 +1,7 @@
 import { setDataAllPeriodForGlobalTable } from './globalTable';
-import { createMap, addMarkerOnMap, addCountryContur, createLegend } from './map';
+import {
+  createMap, addMarkerOnMap, addCountryContur, createLegend,
+} from './map';
 import { createDataStructure, createDataStructureForChart } from './dataStructuring';
 
 // const url
@@ -29,7 +31,6 @@ async function getDataByCountry() {
   // console.log('function getDataByCountry');
   const countriesDataInJSON = await fetch(urlByCountry);
   state.dataCountryInfo = await countriesDataInJSON.json();
-	console.log('state.dataCountryInfo: ', state.dataCountryInfo);
   addMarkerOnMap();
   createLegend();
   createDataStructure(state.dataCountryInfo);
@@ -38,7 +39,19 @@ async function getDataByCountry() {
 async function getDataByCountryDates() {
   const countriesDataInJSON = await fetch(urlByCountryWithDates);
   state.dataCountryInfoDates = await countriesDataInJSON.json();
-  console.log('country', state.dataCountryInfoDates);
+  // let arr1 = state.dataList;
+  
+  // state.dataCountryInfoDates.forEach((element, index) => {
+  //   if (element.province !== null) {
+  //     if (element.province.toUpperCase().includes("AUSTRALIA")) {
+  //       console.log('Element:', element);
+  //     }
+  //   }
+  //   if (element.country.toUpperCase().includes("AUSTRALIA")) {
+  //     console.log('Element:', element);
+  //   }
+  // });
+  // console.log('country', state.dataCountryInfoDates);
   // createDataStructure(state.dataCountryInfoDates); Добавить функцию потом
 }
 
@@ -53,6 +66,7 @@ async function getSummaryGlobalData() {
 async function getSummaryGlobalDataDates() {
   const res = await fetch(urlSummaryWithDates);
   state.dataCovidDates = await res.json();
+  console.log('Coviddates:', state.dataCovidDates);
   createDataStructureForChart(state.dataCovidDates);
 }
 

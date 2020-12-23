@@ -9,7 +9,59 @@
 }
 
 body {
-    background-color: rgb(0, 0, 0);
+	background-color: rgb(0, 0, 0);			
+}
+
+html, body {
+    scrollbar-color: #1a1a1a #0c0b0b;     /* «цвет ползунка» «цвет полосы скроллбара» */
+		scrollbar-width: auto;  /* толщина */
+		/* полоса прокрутки (скроллбар) */
+}
+
+::-webkit-scrollbar {
+	width: 12px; /* ширина для вертикального скролла */
+	height: 12px; /* высота для горизонтального скролла */
+	background-color:#080808;
+}
+/* ползунок скроллбара */
+::-webkit-scrollbar-thumb {
+	background-color:  #141414;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: #5f0000;
+}
+
+/* Стрелки */
+::-webkit-scrollbar-button:vertical:start:decrement {
+	background: linear-gradient(120deg, #0c0b0b 40%, rgba(0, 0, 0, 0) 41%),
+	linear-gradient(240deg, #0c0b0b 40%, rgba(0, 0, 0, 0) 41%),
+	linear-gradient(0deg, #0c0b0b 30%, rgba(0, 0, 0, 0) 31%);
+	background-color: #9c0202;
+}
+
+::-webkit-scrollbar-button:vertical:end:increment {
+	background:
+			linear-gradient(300deg, #0c0b0b 40%, rgba(0, 0, 0, 0) 41%),
+			linear-gradient(60deg, #0c0b0b 40%, rgba(0, 0, 0, 0) 41%),
+			linear-gradient(180deg, #0c0b0b 30%, rgba(0, 0, 0, 0) 31%);
+	background-color:  #9c0202;
+}
+
+::-webkit-scrollbar-button:horizontal:start:decrement {
+	background:
+			linear-gradient(30deg, #0c0b0b 40%, rgba(0, 0, 0, 0) 41%),
+			linear-gradient(150deg, #0c0b0b 40%, rgba(0, 0, 0, 0) 41%),
+			linear-gradient(270deg, #0c0b0b 30%, rgba(0, 0, 0, 0) 31%);
+	background-color: #9c0202;
+}
+
+::-webkit-scrollbar-button:horizontal:end:increment {
+	background:
+			linear-gradient(210deg,#0c0b0b 40%, rgba(0, 0, 0, 0) 41%),
+			linear-gradient(330deg, #0c0b0b 40%, rgba(0, 0, 0, 0) 41%),
+			linear-gradient(90deg, #0c0b0b 30%, rgba(0, 0, 0, 0) 31%);
+	background-color: #9c0202;
 }
 
 a {
@@ -20,8 +72,10 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 85%;
-    height: 6rem;
+    /*width: 85%;*/
+		/*height: 6rem;*/
+		width: 53%;
+    height: 5rem;
     max-width: 155rem;
     margin: 2rem auto 2rem;
 }
@@ -31,7 +85,7 @@ a {
     color: rgb(215, 218, 214);
     font-size: 5rem;
     font-weight: 400;
-    letter-spacing: 0.5rem;
+    letter-spacing: 0.7rem;
     text-shadow: 1px 1px 1px black;
     text-align: center;
     margin: 1rem auto 1rem;
@@ -39,7 +93,10 @@ a {
 }
 
 .header__logo {
-    height: 8rem;
+		/*height: 8rem;*/
+		height: 12rem;
+    z-index: 5;
+    margin-top: 6rem;
 }
 
 .header__logo-img {
@@ -59,8 +116,9 @@ main {
 }
 
 .first__column-wrap {
-    width: 20%;
-    height: 100%;
+  width: 25%;
+	height: 600px;
+	margin: 0.5rem;
 }
 
 .wrap {
@@ -71,23 +129,16 @@ main {
     font-family: 'Acme', sans-serif;
     color: rgb(215, 218, 214);
     font-size: 1.5rem;
-    font-weight: 400;
+		font-weight: 400;		
 }
 
 .table__summery-wrap {
     width: 100%;
-    height: 60%;
+    height: 38%;
     display: flex;
     align-items: center;
-    padding: 0.5rem;
-}
-
-.table__summery-title {
-    font-family: 'Langar', cursive;
-    color: rgb(215, 218, 214);
-    font-size: 1.6rem;
-    font-weight: 400;
-    margin-top: 0.5rem;
+		/*padding: 0.5rem;*/
+		margin-bottom: 1rem;
 }
 
 .button__wrap {
@@ -95,41 +146,64 @@ main {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin: 0.5rem 0.2rem;
+		/*margin: 1rem 0.2rem 0rem;*/
+		margin: -1rem 0.2rem 0rem;
 }
 
-.button {
+.button__wrap-down {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin: 1rem 0.2rem -1rem;
+}
+
+.button,
+.button-down {
     border: 1px solid rgb(90, 1, 1);
     /*border-width: 1px 1px 0px 1px;
 	border-color: rgb(90, 1, 1);*/
     font-family: 'Roboto', sans-serif;
     color: rgb(215, 218, 214);
-    font-size: 1rem;
-    font-weight: regular;
+    font-size: 1.2rem;
+    font-weight: bold;
     padding: 0.2rem 1rem;
-    background-color: black;
+		background-color: black;		
     /*transition: all 0.3s ease-in-out;*/
 }
 
-.button.select {
-    border-width: 1px 1px 0px 1px;
-    border-color: red;
-    background-color: rgb(17, 15, 15);
+.button-down.select {
+  border-width: 0px 1px 1px 1px;
+  border-color: red;	
+	background-color: rgb(156, 0, 0);
 }
 
-.button:hover {
-    cursor: pointer;
-    border-color: rgb(175, 1, 1);
-    background-color: rgb(24, 24, 24);
+.button.select {
+	border-width: 1px 1px 0px 1px;
+	border-color: red;
+	background-color: rgb(156, 0, 0);
+}
+
+.button:hover,
+.button-down:hover {
+  cursor: pointer;
+  border-color: rgb(175, 1, 1);	
+	background-color: rgb(70, 0, 0);
 }
 
 button:active,
 button:focus {
-    outline: none;
+  outline: none;
 }
 
-.button__abs {
+.button_margin {
     margin-left: 2rem;
+}
+
+.table__summery-data-wrap {
+	width:98%;	
+	/*border: 1px solid rgb(90, 1, 1);
+	border-radius: 1rem;*/
 }
 
 .table__summery-data {
@@ -150,56 +224,259 @@ button:focus {
     font-size: 3rem;
 }
 
-
-/*.table__global {
-	max-width: 90%;
-	color: rgb(215, 218, 214);
-	border-spacing: 1px;
-	border-collapse: collapse;
-	border-color: rgb(95, 95, 95);
-	box-shadow: 1px 1px 10px -3px rgb(44, 44, 44);
+.actual__data {
+	width: 100%;
+	height: 8%;
 }
 
-.table__global-row,
-.table__global-column {
-	padding: 0.7rem 1rem;
-	font-family: "Inter", Verdana, sans-serif;
-	font-size: 1.2rem;
-	font-weight: 600;
-	letter-spacing: 0.15em;
+
+.table__summery-title {
+	height: 4rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+  font-family: 'Langar', cursive;
+  color: rgb(215, 218, 214);
+  font-size: 1.7rem;
+  font-weight: 400;
+  margin-top: -1rem;
 }
 
-.table__global-column {}*/
+.button__summery-global {
+	background-color: rgb(22, 0, 0);
+	border: 1px solid rgb(90, 1, 1);
+	border-radius: 1rem;
+	padding: 0.5rem 1rem;
+	font-family: 'Langar', cursive;
+  color: rgb(215, 218, 214);
+  font-size: 1.7rem;
+	letter-spacing: 0.4rem;
+	box-shadow:  0 0 0 1px #2e0000,
+	0 0 0 2px #570101,
+	0 0 0 3px #910101;
+	/*transition: all 200ms ease-out;*/
+}
+
+.button__summery-global:hover {
+	cursor: pointer;
+background-color: rgb(39, 0, 0);
+	box-shadow:  
+	0 0 0 1px #2e0000,
+	0 0 0 2px #570101,
+	0 0 0 3px #910101;
+}
+
+.button__summery-global.active {	
+	font-weight: bold;
+	color: red;		
+}
+
+.button__summery-global:active {		
+	font-size: 1.65rem;
+	padding: 0.35rem 0.95rem;
+}
 
 .chart-wrap {
     width: 100%;
-    height: 40%;
+		height: 47%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+}
+
+.chart {
+	width:98%;
+	height: 100%;
+	/*border: 1px solid rgb(90, 1, 1);*/
+    /*border-radius: 1rem;*/
+}
+
+.second__column-wrap {
+	width: 50%;
+	height: 600px;
+	margin: 0.5rem;
+}
+
+.map__country {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 7%;
+	/*margin: 0.8rem 1rem 0;*/
+	padding: 0.4rem 1rem;
+	/*border: 1px solid rgb(90, 1, 1);*/
+	border: 1px solid red;	
+	border-radius: 1rem;
+	font-family: 'Langar', cursive;
+	font-size: 1.7rem;
+	font-weight: 400;
+	text-align: center;
+	letter-spacing: 0.2rem;		
+  color: rgb(215, 218, 214); 
 }
 
 .map__data-wrap {
-    width: 50%;
-    height: 100%;
+    width: 100%;
+		height: 91%;
+		margin-top: 1rem;
+}
+
+.map__country.active {	
+	color: red;
+	font-size: 1.7rem;
 }
 
 .map__data {
 	width:100%;
-	height:580px;
+	height: 52.8rem;
 	border-radius: 0 0 1rem 1rem;
 }
 
-.table__city-list-wrap {
-    width: 30%;
-    height: 100%;
+.info {
+	width: 30rem;
+	padding: 6px 8px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+	color: rgb(255, 255, 255);
+	font-size: 1.5rem;
+	background: rgba(14, 13, 13);
+	box-shadow: 1px 1px 5px rgba(209, 209, 209, 0.2);
+	border-radius: 5px;
+	opacity: 0.9;
 }
 
+.info h4 {
+	margin: 0 0 3px;
+	color: rgb(160, 4, 4);
+}
+
+.legend {
+	width: 98%;
+	line-height: 18px;	
+	display: flex;	
+	flex-wrap: wrap;
+	justify-content: center;	
+}
+
+.legend_string {
+	display: flex;
+	margin: 0.2rem 0 0.2rem 1.5rem;
+}
+
+.legend_img {
+	width: 4rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.legend_text {
+	margin-left: 0.3rem;
+	display: flex;	
+	align-items: center;
+	font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: rgb(255, 254, 254);
+    font-size: 1.5rem;	
+}
+
+.table__city-list-wrap {
+    width: 25%;
+    height: 606px;
+    margin: 0.5rem;
+}
+
+.countries__table-wrap {
+	width: 100%;
+	height: 88%;
+	display: flex;
+	flex-direction: column;
+}
+
+#table__wrapper {
+	overflow: auto;
+	margin: 0.5rem;
+}
+
+#countries__table {
+	width: 98%;
+}
+
+#search__field {
+  /*position: sticky;
+	top: 0;*/
+	width: 99%;
+	height: 5%;
+	margin: 1rem auto;
+	background: #181818;
+	color: white;
+}
+
+.menu {
+    display: none;
+    max-height: 535px;
+    position: absolute;
+    background-color: white;
+    top: 30%;
+    color: black;
+    width: inherit;
+    overflow: auto;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+}
+
+.menu-option {
+    cursor: pointer;
+    padding: 10px 0;
+    color: white;
+}
+
+.menu-option:hover {
+    background-color: rgb(160, 4, 4);
+	/* color: rgb(160, 4, 4); */
+}
+
+.show {
+    display: block;
+}
+
+.dark {
+    background-color: rgba(14, 13, 13);
+}
+
+.black {
+    background-color: rgb(77, 77, 77);
+}
+
+.flag-image {
+  width: 20px;
+}
+
+.keyboard {
+    display: grid;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    transition: 1s linear;
+    font-size: 18px;
+    left: 0;
+    bottom: 0;
+}
+
+.keyboard__row {
+    grid-template-columns: repeat(13, 1fr);
+    display: grid;
+}
 
 /* footer */
-
 .footer {
     width: 85%;
     height: 3rem;
     max-width: 155rem;
-    margin: 2rem auto 1rem;
+    margin: 1.5rem auto 0.8rem;
 }
 
 .footer__wrapper {
@@ -211,10 +488,8 @@ button:focus {
 .footer__link {
     font-size: 1.5rem;
     font-family: 'Roboto', sans-serif;
-    font-weight: normal;
-    /* width: 30rem; */
-    color: rgb(255, 255, 255);
-    /* margin: 0 20rem; */
+    font-weight: normal;    
+    color: rgb(255, 255, 255);   
     display: flex;
     align-items: flex-end;
 }
@@ -238,7 +513,7 @@ button:focus {
 }
 
 .footer__link-href {
-    height: 3.5rem;
+	height: 2.8rem;
     width: 8rem;
 }
 

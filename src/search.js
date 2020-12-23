@@ -17,7 +17,7 @@ const searchProcess = () => {
     if (input.value.length === element.name.length && element.name.toUpperCase().startsWith(input.value.toUpperCase()) && element.name.toUpperCase().endsWith(input.value.toUpperCase())) {
       state.countryId = element.iso;
       state.allWorld = false;
-	    changeInfoByClickOnMap();
+      changeInfoByClickOnMap();
     }
     if (element.name.toUpperCase().startsWith(input.value.toUpperCase())) {
       const option = document.createElement('div');

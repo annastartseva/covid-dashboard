@@ -390,9 +390,15 @@ background-color: rgb(39, 0, 0);
 	
 .chart {
 	width:98%;
-	height: 100%;
+	height: 240px;
 	/*border: 1px solid rgb(90, 1, 1);*/
     /*border-radius: 1rem;*/
+}
+
+.chartjs-render-monitor {
+	animation: chartjs-render-animation 0.001s;
+	width: 380px;
+	height: 240px;
 }
 
 .second__column-wrap {

@@ -39,18 +39,6 @@ async function getDataByCountry() {
 async function getDataByCountryDates() {
   const countriesDataInJSON = await fetch(urlByCountryWithDates);
   state.dataCountryInfoDates = await countriesDataInJSON.json();
-  // let arr1 = state.dataList;
-  // state.dataCountryInfoDates.forEach((element, index) => {
-  //   if (element.province !== null) {
-  //     if (element.province.toUpperCase().includes("AUSTRALIA")) {
-  //       console.log('Element:', element);
-  //     }
-  //   }
-  //   if (element.country.toUpperCase().includes("AUSTRALIA")) {
-  //     console.log('Element:', element);
-  //   }
-  // });
-  // console.log('country', state.dataCountryInfoDates);
   // createDataStructure(state.dataCountryInfoDates); Добавить функцию потом
 }
 
@@ -59,14 +47,13 @@ async function getSummaryGlobalData() {
   state.dataCovid = await res.json();
   const createDataUpdate = new Date(state.dataCovid.updated);
   dataUpdate.innerHTML = `Last Update <br> ${createDataUpdate}`;
-  console.log('state.dataCovid: ', state.dataCovid);
+  // console.log('state.dataCovid: ', state.dataCovid);
   setDataAllPeriodForGlobalTable(state.dataCovid);
 }
 
 async function getSummaryGlobalDataDates() {
   const res = await fetch(urlSummaryWithDates);
   state.dataCovidDates = await res.json();
-  console.log('Coviddates:', state.dataCovidDates);
   createDataStructureForChart(state.dataCovidDates);
 }
 

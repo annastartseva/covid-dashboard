@@ -9,3 +9,4 @@ import './eventListener';
 import './search';
 import './keyboard';
 import './chartTable';
+import './keyboardConstants';

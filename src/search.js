@@ -1,6 +1,7 @@
 import { state } from './main';
 import { changeInfoByClickOnMap } from './globalTable';
 import { createDataStructureForChart } from './dataStructuring';
+import { myChart } from './chartTable';
 
 const searchProcess = () => {
   if (document.querySelector('.menu')) {
@@ -18,7 +19,6 @@ const searchProcess = () => {
   const select = document.createElement('div');
   select.classList.add('menu', 'show');
   wrapper.appendChild(select);
-console.log('sss', searchList, state.dataCountryInfoDates)
   searchList.forEach((element) => {
     state.dataCountryInfoDates.forEach((item) => {
       if (element.name === 'Australia' && item.country === 'Australia' && item.province === 'new south wales') {
@@ -137,7 +137,6 @@ console.log('sss', searchList, state.dataCountryInfoDates)
       }
     });
   });
-  console.log('Fr:', searchList);
   searchList.forEach((element, index) => {
     if (input.value.length === element.name.length
     && element.name.toUpperCase().startsWith(input.value.toUpperCase())
@@ -146,6 +145,7 @@ console.log('sss', searchList, state.dataCountryInfoDates)
       state.allWorld = false;
       changeInfoByClickOnMap();
       createDataStructureForChart(element);
+      myChart.remove();
     }
     if (element.name.toUpperCase().startsWith(input.value.toUpperCase())) {
       const option = document.createElement('div');
@@ -191,10 +191,19 @@ const searchCountries = (menuData) => {
       option.classList.add('black');
     }
   });
+
   document.querySelector('#search__field').addEventListener('input', searchProcess);
-  document.querySelector('#search__field').addEventListener('focus', () => document.querySelector('.menu').classList.add('show'));
-  document.querySelector('#search__field').addEventListener('blur', () => document.querySelector('.menu').classList.remove('show'));
-  // document.querySelector('#search__field').addEventListener('change', () => alert('smth'));
+  document.querySelector('#search__field').addEventListener('focus', () => 
+    {
+      document.querySelector('.menu').classList.add('show');
+      document.querySelector('.keyboard').classList.remove('off');
+      document.querySelector('.keyboard').classList.add('on');
+    });
+  document.querySelector('#search__field').addEventListener('blur', () => {
+    document.querySelector('.menu').classList.remove('show');
+    document.querySelector('.keyboard').classList.remove('on');
+    document.querySelector('.keyboard').classList.add('off');
+  });
 };
 
 export { searchCountries, searchProcess };

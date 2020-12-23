@@ -1,6 +1,5 @@
 import { state } from './main';
 
-// Table Global Case
 const totalConfirmed = document.querySelector('#total_confirm');
 const totalRecover = document.querySelector('#total_recover');
 const totalDeaths = document.querySelector('#total_deaths');
@@ -44,11 +43,9 @@ const setDataAllPeriodForCountryInGlobalTable = () => {
   const selectCountryId = state.countryId;
   const data = state.dataCountryInfo;
   const idInTable = data.map((item) => item.countryInfo.iso2);
-  const idCountryId = idInTable.indexOf(selectCountryId);
-  // const numberCase = state.dataCountryInfo[idCountryId][tooltipText[0]];
+	const idCountryId = idInTable.indexOf(selectCountryId);  
   const countryName = data[idCountryId].country;
-  const countryPopulation = data[idCountryId].population;
-  console.log('country ', countryName);
+	const countryPopulation = data[idCountryId].population;
   let totalCountryConfirmedData = data[idCountryId].cases;
   let totalCountryRecoverData = data[idCountryId].recovered;
   let totalCountryDeathsData = data[idCountryId].deaths;
@@ -64,11 +61,9 @@ const setDataTodayForCountryInGlobalTable = () => {
   const selectCountryId = state.countryId;
   const data = state.dataCountryInfo;
   const idInTable = data.map((item) => item.countryInfo.iso2);
-  const idCountryId = idInTable.indexOf(selectCountryId);
-  // const numberCase = state.dataCountryInfo[idCountryId][tooltipText[0]];
+	const idCountryId = idInTable.indexOf(selectCountryId);
   const countryName = data[idCountryId].country;
-  const countryPopulation = data[idCountryId].population;
-  console.log('country ', countryName);
+	const countryPopulation = data[idCountryId].population;
   let todayCountryConfirmedData = data[idCountryId].todayCases;
   let todayCountryRecoverData = data[idCountryId].todayRecovered;
   let todayCountryDeathsData = data[idCountryId].todayDeaths;
@@ -80,8 +75,7 @@ const setDataTodayForCountryInGlobalTable = () => {
     todayCountryRecoverData = todayCountryRecoverData.toFixed(2);
     todayCountryDeathsData = todayCountryDeathsData.toFixed(2);
   }
-  setDataToDomElement(todayCountryConfirmedData, todayCountryRecoverData, todayCountryDeathsData, countryName);
-
+	setDataToDomElement(todayCountryConfirmedData, todayCountryRecoverData, todayCountryDeathsData, countryName);
 };
 
 const changeInfoByClickOnMap = () => {

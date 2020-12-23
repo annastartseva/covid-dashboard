@@ -13,9 +13,8 @@ body {
 }
 
 html, body {
-    scrollbar-color: #1a1a1a #0c0b0b;     /* «цвет ползунка» «цвет полосы скроллбара» */
-		scrollbar-width: auto;  /* толщина */
-		/* полоса прокрутки (скроллбар) */
+    scrollbar-color: #1a1a1a #0c0b0b;    
+		scrollbar-width: auto; 	
 }
 
 .stop-scroll {
@@ -23,11 +22,11 @@ html, body {
 }
 
 ::-webkit-scrollbar {
-	width: 12px; /* ширина для вертикального скролла */
-	height: 12px; /* высота для горизонтального скролла */
+	width: 12px; 
+	height: 12px; 
 	background-color:#080808;
 }
-/* ползунок скроллбара */
+
 ::-webkit-scrollbar-thumb {
 	background-color:  #141414;
 }
@@ -73,44 +72,38 @@ a {
 }
 
 .header__wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /*width: 85%;*/
-		/*height: 6rem;*/
-		width: 53%;
-    height: 5rem;
-    max-width: 155rem;
-    margin: 2rem auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;   
+	width: 53%;
+  height: 5rem;
+  max-width: 155rem;
+  margin: 2rem auto 2rem;
 }
 
 .header__title {
-    font-family: 'Langar', cursive;
-    color: rgb(215, 218, 214);
-    font-size: 5rem;
-    font-weight: 400;
-    letter-spacing: 0.7rem;
-    text-shadow: 1px 1px 1px black;
-    text-align: center;
-    margin: 1rem auto 1rem;
-    /*transition: all 0.5s ease;*/
+  font-family: 'Langar', cursive;
+  color: rgb(215, 218, 214);
+  font-size: 5rem;
+  font-weight: 400;
+  letter-spacing: 0.7rem;
+  text-shadow: 1px 1px 1px black;
+  text-align: center;
+  margin: 1rem auto 1rem;    
 }
 
-.header__logo {
-		/*height: 8rem;*/
-		height: 12rem;
-    z-index: 5;
-    margin-top: 6rem;
+.header__logo {	
+	height: 12rem;
+  z-index: 5;
+  margin-top: 6rem;
 }
 
 .header__logo-img {
-    /*width: 100%;*/
-		height: 100%;
-		
-    animation-name: rotation;
-    animation-duration: 7s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+  height: 100%;
+	animation-name: rotation;
+  animation-duration: 7s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 @keyframes rotation {
@@ -123,7 +116,6 @@ a {
 }
 
 /* MAIN */
-
 main {
     min-height: calc(100vh - 17rem);
 }
@@ -139,25 +131,24 @@ main {
 }
 
 .wrap {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid red;
-    border-radius: 1rem;
-    font-family: 'Acme', sans-serif;
-    color: rgb(215, 218, 214);
-    font-size: 1.5rem;
-		font-weight: 400;		
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+  border-radius: 1rem;
+  font-family: 'Acme', sans-serif;
+  color: rgb(215, 218, 214);
+  font-size: 1.5rem;
+	font-weight: 400;		
 }
 
 .table__summery-wrap {
-    width: 100%;
-    height: 38%;
-    display: flex;
-		align-items: center;
-		justify-content: space-between;
-		/*padding: 0.5rem;*/
-		margin-bottom: 1rem;
-		transition: all 0.5s ease;
+  width: 100%;
+  height: 38%;
+  display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+	transition: all 0.5s ease;
 }
 
 .table__summery-wrap.full-active{
@@ -173,13 +164,12 @@ main {
 }
 
 .button__wrap {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-		/*margin: 1rem 0.2rem 0rem;*/
-		margin: -1rem 0.2rem 0rem;
-		z-index: 100;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;	
+	margin: -1rem 0.2rem 0rem;
+	z-index: 100;
 }
 
 .button__wrap-down {
@@ -265,16 +255,13 @@ box-shadow: 1px 1px 7px rgb(248, 143, 143);
 
 .button,
 .button-down {
-    border: 1px solid rgb(90, 1, 1);
-    /*border-width: 1px 1px 0px 1px;
-	border-color: rgb(90, 1, 1);*/
-    font-family: 'Roboto', sans-serif;
-    color: rgb(215, 218, 214);
-    font-size: 1.2rem;
-    font-weight: bold;
-    padding: 0.2rem 1rem;
-		background-color: black;		
-    /*transition: all 0.3s ease-in-out;*/
+  border: 1px solid rgb(90, 1, 1);   
+  font-family: 'Roboto', sans-serif;
+  color: rgb(215, 218, 214);
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.2rem 1rem;
+	background-color: black;
 }
 
 .button-down.select {
@@ -308,8 +295,6 @@ button:focus {
 .table__summery-data-wrap {
 	width:98%;
 	margin-bottom: 1rem;
-	/*border: 1px solid rgb(90, 1, 1);
-	border-radius: 1rem;*/
 }
 
 .table__summery-data-wrap.full-active {
@@ -368,7 +353,6 @@ button:focus {
 	box-shadow:  0 0 0 1px #2e0000,
 	0 0 0 2px #570101,
 	0 0 0 3px #910101;
-	/*transition: all 200ms ease-out;*/
 }
 
 .button__summery-global:hover {
@@ -413,8 +397,6 @@ background-color: rgb(39, 0, 0);
 .chart {
 	width:98%;
 	height: 240px;
-	/*border: 1px solid rgb(90, 1, 1);*/
-    /*border-radius: 1rem;*/
 }
 
 .chartjs-render-monitor {
@@ -435,9 +417,7 @@ background-color: rgb(39, 0, 0);
 	align-items: center;
 	width: 100%;
 	height: 7%;
-	/*margin: 0.8rem 1rem 0;*/
 	padding: 0.4rem 1rem;
-	/*border: 1px solid rgb(90, 1, 1);*/
 	border: 1px solid red;	
 	border-radius: 1rem;
 	font-family: 'Langar', cursive;
@@ -542,9 +522,9 @@ background-color: rgb(39, 0, 0);
 	display: flex;	
 	align-items: center;
 	font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-    color: rgb(255, 254, 254);
-    font-size: 1.5rem;	
+  font-weight: bold;
+  color: rgb(255, 254, 254);
+  font-size: 1.5rem;	
 }
 
 .table__city-list-wrap {
@@ -580,9 +560,7 @@ background-color: rgb(39, 0, 0);
 	width: 98%;
 }
 
-#search__field {
-  /*position: sticky;
-	top: 0;*/
+#search__field { 
 	width: 99%;
 	height: 5%;
 	margin: 1rem auto;
@@ -591,16 +569,16 @@ background-color: rgb(39, 0, 0);
 }
 
 .menu {
-    display: none;
-    max-height: 535px;
-    position: absolute;
-    background-color: white;
-    top: 30%;
-    color: black;
-    width: inherit;
-    overflow: auto;
-    border-radius: 0 0 10px 10px;
-    text-align: center;
+  display: none;
+  max-height: 535px;
+  position: absolute;
+  background-color: white;
+  top: 30%;
+  color: black;
+  width: inherit;
+  overflow: auto;
+  border-radius: 0 0 10px 10px;
+  text-align: center;
 }
 
 .menu-option {
@@ -611,7 +589,6 @@ background-color: rgb(39, 0, 0);
 
 .menu-option:hover {
     background-color: rgb(160, 4, 4);
-	/* color: rgb(160, 4, 4); */
 }
 
 .show {
@@ -715,4 +692,556 @@ background-color: rgb(39, 0, 0);
     src: url("./assets/fonts/Roboto-Bold.ttf");
     font-style: normal;
     font-weight: bold;
+}
+
+
+@media (min-width:1020px) and (max-width:1400px) {
+	.header__wrapper {    
+		width: 50%;
+    height: 4.5rem;
+    max-width: 130rem;  
+}
+
+.header__title {   
+	font-size: 4.1rem;
+	font-weight: 400;
+	letter-spacing: 0.6rem;    
+}
+
+.header__logo {
+	height: 11rem;
+	z-index: 700;
+	margin-top: 3rem;
+}
+
+	.first__column-wrap {
+		width: 30%;
+		height: 515px;
+		margin: 0.5rem;
+	}
+
+	.table__summery-wrap {   
+    height: 36%;   
+}
+
+.wrap {   
+	font-size: 1.3rem;
+	font-weight: 400;		
+}
+
+.table__summery-wrap {
+	width: 100%;
+	height: 36%;  
+}
+
+.table__summery-wrap.full-active{
+z-index: 800;
+}
+
+.full__screen.full-summery{	
+top: 25rem;
+}
+
+.full__screen.full-chart{
+	top: 58rem;
+}
+
+.full__screen.full-map{
+	left: 42rem;
+	top: 58rem;
+}
+
+.full__screen.full-countries{
+	left: 103rem;
+	top: 58rem;
+}
+
+.full__screen-exit {
+z-index: 800;
+}
+
+.button,
+.button-down { 
+font-size: 1rem;
+padding: 0.2rem 0.7rem;
+}
+
+.button-down.select {
+border-width: 1px;
+border-color: red;	
+background-color: rgb(156, 0, 0);
+}
+.button_margin {
+margin-left: 1rem;
+}
+
+.table__summery-data-wrap {
+margin-bottom: 0.7rem;
+}
+
+.table__summery-data-title {
+	margin: 0.8rem 0 0.5rem 0;
+}
+
+.table__summery-data-number {
+font-size: 2.3rem;
+}
+
+.actual__data {
+	height: 7%;
+	font-size: 0.9rem;
+	padding-top: 0.4rem;
+}
+
+.table__summery-title {
+	height: 3.6rem;
+	font-size: 1.5rem;
+}
+
+.chart-wrap {   
+	height: 51%;
+}
+
+.chart-wrap.full-active{
+z-index: 800;
+}
+
+.second__column-wrap {
+width: 45%;
+height: 511px;
+margin: 0.5rem;
+}
+
+.map__data-wrap {
+	width: 100%;
+	height: 93%;
+}
+
+.map__data-wrap.full-active {
+z-index: 800;
+}
+
+.map__data {
+margin-top: -0.9rem;
+}
+
+.leaflet-top .leaflet-control {
+margin-top: 20px;
+}
+
+.leaflet-top, .leaflet-bottom {
+z-index: 500;
+}
+
+.leaflet-touch .leaflet-bar a {
+width: 20px;
+height: 20px;
+line-height: 20px;
+}
+
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out {
+font-size: 20px;
+}
+
+.info {
+width: 27rem;
+padding: 4px 8px;
+font-size: 1.2rem;
+}
+
+.info h4 {
+margin: 0 0 3px;
+color: rgb(160, 4, 4);
+}
+
+.legend {
+width: 95%;
+line-height: 14px;		
+}
+
+.legend_string {	
+margin: 0 0 0 1rem;
+}
+
+.legend_text {
+margin-left: 0.3rem;
+font-weight: bold;  
+font-size: 1.2rem;	
+}
+
+.table__city-list-wrap {
+	width: 25%;
+	height: 517px;
+	margin: 0.5rem;
+}
+
+.table__city-list-wrap.full-active{
+z-index: 800;
+}
+
+.countries__table-wrap {	
+height: 87%;	
+}
+
+.countries__table-row {
+font-size: 1.2rem;
+}
+
+.menu {
+	max-height: 480px;
+	top: 20%;
+}
+
+.menu-option {
+padding: 7px 0;   
+}
+
+.flag-image {
+width: 18px;
+}
+}
+
+@media (min-width:900px) and (max-width:1019px) {
+	.header__wrapper {    
+		width: 49%;
+    height: 3.5rem;
+    max-width: 950rem;
+    margin: 2rem auto 1.5rem;
+}
+
+.header__title {   
+    font-size: 3.2rem;   
+}
+
+.header__logo {
+	height: 8.6rem;    
+  margin-top: 2.5rem;
+}
+
+.first__column-wrap {
+  width: 30%;
+	height: 506px;
+	margin: 0.5rem;
+}
+
+.wrap {   
+    font-size: 1.2rem;	
+}
+
+.full__screen.full-summery{	
+	top: 24rem;
+}
+
+.full__screen.full-chart{
+	top: 56rem;
+}
+
+.full__screen.full-map{
+	left: 32rem;
+	top: 56rem;
+}
+
+.full__screen.full-countries{
+	left: 77rem;
+	top: 56rem;
+}
+
+.button,
+.button-down { 
+  font-size: 0.95rem;  
+  padding: 0.2rem 0.3rem;
+}
+
+.button_margin {
+  margin-left: 0.8rem;
+}
+
+.table__summery-data-title {
+  font-family: 'Roboto', sans-serif;
+  margin: 1rem 0 0.5rem 0;
+}
+
+.table__summery-data-number {  
+  font-size: 2.3rem;
+}
+
+.actual__data {
+	height: 10%;
+	font-size: 1rem;
+	padding-top: 0.7rem;
+}
+
+.chart-wrap {   
+	height: 45%;
+}
+
+.second__column-wrap {
+	width: 45%;
+	height: 504px;
+	margin: 0.5rem;
+}
+
+.map__data-wrap {
+    width: 100%;
+		height: 93%;
+		margin-top: 0.5rem;
+}
+
+.leaflet-top, .leaflet-bottom {
+	z-index: 500;
+}
+
+.leaflet-touch .leaflet-bar a {
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+}
+
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out {
+	font-size: 20px;
+}
+
+.info {
+	width: 27rem;
+	padding: 4px 8px; 
+	font-size: 1.2rem;
+}
+
+.info h4 {
+	margin: 0 0 3px;
+	color: rgb(160, 4, 4);
+}
+
+.legend {
+	width: 95%;
+	line-height: 14px;		
+}
+
+.legend_string {	
+	margin: 0 0 0 1rem;
+}
+
+.legend_text {
+	margin-left: 0.3rem;
+  font-weight: bold;  
+  font-size: 1.2rem;	
+}
+
+.table__city-list-wrap {
+  width: 25%;
+  height: 507px;
+  margin: 0.5rem;
+}
+
+.table__city-list-wrap.full-active{
+	z-index: 800;
+}
+
+.countries__table-wrap {	
+	height: 87%;	
+}
+
+.countries__table-row {
+	font-size: 1.2rem;
+}
+
+.menu {    
+  max-height: 480px;   
+  top: 20%;   
+}
+
+.menu-option {
+  padding: 7px 0;   
+}
+
+.flag-image {
+  width: 18px;
+}
+}
+
+@media (min-width:500px) and (max-width:899px) {
+
+	.first__column-wrap {
+		width: 47%;
+		height: 506px;
+		margin: 0.5rem;
+		order: 1;
+	}
+	.second__column-wrap {
+		width: 99%;
+		height: 504px;
+		margin: 0.5rem;
+		order: 2;
+	}
+
+	.table__city-list-wrap {
+    width: 47%;
+    height: 507px;
+		margin: 0.5rem;
+		order: 1;
+}
+
+.header__wrapper {    
+	width: 70%;
+	height: 3.5rem;
+	max-width: 950rem;
+	margin: 2rem auto 1.5rem;
+}
+
+.header__title {   
+	font-size: 3rem;	
+	letter-spacing: 0.3rem;
+}
+
+.header__logo {
+	height: 5.5rem;
+	margin-top: -0.5rem;
+}
+
+.wrap {   
+	font-size: 1.2rem;
+}
+
+.data__wrap{
+	flex-wrap: wrap;
+	row-gap: 1rem;
+	column-gap: 0.5rem;
+	justify-content: space-around;
+}
+
+.full__screen.full-summery{	
+top: 24rem;
+}
+
+.full__screen.full-chart{
+top: 56rem;
+}
+
+.full__screen.full-map{
+	left: 1.5rem;
+	top: 107rem;
+}
+
+.full__screen.full-countries{
+	left: 44rem;
+top: 56rem;
+}
+
+.table__city-list-wrap.full-active{
+	width: 98.5%;	
+	z-index: 800;
+}
+
+.table__summery-wrap.full-active {
+	width: 98.5%;
+}
+
+.chart-wrap.full-active {	
+	width: 98.5%;
+}
+
+.map__data-wrap.full-active {
+	width: 99%;
+}
+
+.button,
+.button-down { 
+font-size: 0.95rem;
+padding: 0.2rem 0.3rem;
+}
+
+.button_margin {
+margin-left: 0.8rem;
+}
+
+.table__summery-data-title {
+margin: 1rem 0 0.5rem 0;
+}
+
+.table__summery-data-number {  
+
+font-size: 2.3rem;
+}
+
+.actual__data {
+height: 10%;
+font-size: 1rem;
+padding-top: 0.7rem;
+}
+
+.chart-wrap {   
+height: 45%;
+}
+
+
+.map__data-wrap {
+	width: 100%;
+	height: 93%;
+	margin-top: 0.5rem;
+}
+
+.leaflet-top, .leaflet-bottom {
+z-index: 500;
+}
+
+.leaflet-touch .leaflet-bar a {
+width: 20px;
+height: 20px;
+line-height: 20px;
+}
+
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out {
+font-size: 20px;
+}
+
+.info {
+width: 27rem;
+padding: 4px 8px;
+font-size: 1.2rem;
+}
+
+.info h4 {
+margin: 0 0 3px;
+color: rgb(160, 4, 4);
+}
+
+.legend {
+width: 95%;
+line-height: 14px;		
+}
+
+.legend_string {	
+margin: 0 0 0 1rem;
+}
+
+.legend_text {
+margin-left: 0.3rem;
+font-weight: bold;  
+font-size: 1.2rem;	
+}
+
+.table__city-list-wrap.full-active{
+z-index: 800;
+}
+
+.countries__table-wrap {	
+height: 87%;	
+}
+
+.countries__table-row {
+font-size: 1.2rem;
+}
+
+.menu {    
+	max-height: 480px;   
+	top: 20%;  
+}
+
+.menu-option {
+padding: 7px 0;   
+}
+
+.flag-image {
+width: 18px;
+}	
 }

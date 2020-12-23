@@ -37,7 +37,14 @@ const myChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           beginAtZero: true,
+          callback: (value) => `${value / 10e6}M`,
         },
+      }],
+      xAxes: [{
+        type: 'time',
+        time: {
+          unit: 'month'
+        }
       }],
     },
   },

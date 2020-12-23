@@ -28,8 +28,6 @@ const createMap = () => {
 
 const highlightFeature = (e) => {
   const layer = e.target;
-  // console.log('e ', e);
-  // console.log('e ', e.sourceTarget.feature.properties);
 
   layer.setStyle({
     weight: 1,
@@ -54,6 +52,12 @@ const resetHighlight = (e) => {
   });
 };
 
+const getCountryId = (e) => {
+  state.countryId = e.sourceTarget.feature.properties.iso_a2;
+  state.allWorld = false;
+  changeInfoByClickOnMap();
+};
+
 const onEachFeatureFunc = (feature, layer) => {
   layer.on({
     mouseover: highlightFeature,
@@ -62,105 +66,26 @@ const onEachFeatureFunc = (feature, layer) => {
   });
 };
 
-const addCountryContur = () => {
-  const geoJsonData = state.dataGeoJson;
-  const myStyle = {
-    color: '#353535',
-    weight: 0,
-    opacity: 0.4,
-    dashArray: 3,
-    fillColor: '#353535',
-    fillOpacity: 0.1,
-  };
-  L.geoJSON(geoJsonData, {
-    style: myStyle,
-    onEachFeature: onEachFeatureFunc,
-  }).addTo(map);
-  createInfoPopup();
-};
-
-const createTooltipText = (iso) => {
-  // console.log('function createTooltipText');
-  // console.log('iso ', iso);
-  const data = state.dataCountryInfo;
-  const countryId = data.map((item) => item.countryInfo.iso2);
-  const idCountryId = countryId.indexOf(iso);
-  // console.log('idCountryId ', idCountryId);
-  const tooltipText = selectVariable();
-  const numberCase = state.dataCountryInfo[idCountryId][tooltipText[0]];
-  // console.log('numberCase ', numberCase);
-  const country = state.dataCountryInfo[idCountryId].country;
-  return [numberCase, country, tooltipText[1]];
-};
-
-const createInfoPopup = () => {
-  info = L.control();
-
-  info.onAdd = () => {
-    infoDiv = L.DomUtil.create('div', 'info');
-    infoDiv.innerHTML = '<h4>Covid Information</h4> Hover over a country';
-    return infoDiv;
-  };
-
-  info.update = (iso) => {
-    const data = createTooltipText(iso);
-    infoDiv.innerHTML = `<h4>Covid Information</h4>${data[1]} =>  ${data[2]}:  ${data[0].toLocaleString()}`;
-  };
-
-  info.addTo(map);
-};
-
-const getCountryId = (e) => {
-  state.countryId = e.sourceTarget.feature.properties.iso_a2;
-  console.log('state.countryId ', state.countryId);
-  state.allWorld = false;
-  changeInfoByClickOnMap();
-};
-
-const removeMarkerOnMap = () => {
-  map.removeLayer(layerGroup);
-};
-
-const removeLegend = () => {
-  if (legendDiv.firstChild) {
-    while (legendDiv.firstChild) {
-      legendDiv.removeChild(legendDiv.firstChild);
+const selectVariable = () => {
+  let data = '';
+  if (state.allPeriod === true) {
+    if (state.confirmed === true) {
+      data = ['cases', 'Total Confirmed'];
+    } else if (state.recovered === true) {
+      data = ['recovered', 'Total Recovered'];
+    } else if (state.deaths === true) {
+      data = ['deaths', 'Total Deaths'];
+    }
+  } else if (state.allPeriod === false) {
+    if (state.confirmed === true) {
+      data = ['todayCases', 'Today Confirmed'];
+    } else if (state.recovered === true) {
+      data = ['todayRecovered', 'Today Recovered'];
+    } else if (state.deaths === true) {
+      data = ['todayDeaths', 'Today Deaths'];
     }
   }
-};
-
-const changeLegend = () => {
-  for (let i = 0; i < grades.length; i += 1) {
-    urlSize = typeOfMarker(grades[i] + 10);
-    legendDiv.innerHTML +=
-      `<div class ="legend_string">
-      <div class="legend_img" >
-      <img src="${urlSize.iconUrl}" alt="icon_circle" 
-      width="${urlSize.iconSize[0]}" height="${urlSize.iconSize[0]}"></div> 
-      <div class ="legend_text">` + grades[i].toLocaleString() + (grades[i + 1] ? '&ndash;'
-        + grades[i + 1].toLocaleString() : '+' + '</div></div>');
-  }
-}
-
-const createLegend = () => {
-  legend = L.control({ position: 'bottomleft' });
-
-  legend.onAdd = () => {
-    legendDiv = L.DomUtil.create('div', 'info legend');
-
-    for (let i = 0; i < grades.length; i++) {
-      urlSize = typeOfMarker(grades[i] + 10);
-      legendDiv.innerHTML
-        += `<div class ="legend_string">
-        <div class="legend_img" >
-        <img src="${urlSize.iconUrl}" alt="icon_circle" 
-        width="${urlSize.iconSize[0]}" height="${urlSize.iconSize[0]}"></div> 
-        <div class ="legend_text">` + grades[i].toLocaleString() + (grades[i + 1] ? '&ndash;'
-          + grades[i + 1].toLocaleString() : '+' + '</div></div>');
-    }    
-    return legendDiv;
-  };
-  legend.addTo(map);
+  return data;
 };
 
 const typeOfMarker = (caseNumber) => {
@@ -194,25 +119,111 @@ const typeOfMarker = (caseNumber) => {
   return iconOptions;
 };
 
-const selectVariable = () => {
-  let data = '';
-  if (state.allPeriod === true) {
-    if (state.confirmed === true) {
-      data = ['cases', 'Total Confirmed'];
-    } else if (state.recovered === true) {
-      data = ['recovered', 'Total Recovered'];
-    } else if (state.deaths === true) {
-      data = ['deaths', 'Total Deaths'];
+const createTooltipText = (iso) => {
+  const data = state.dataCountryInfo;
+  const countryId = data.map((item) => item.countryInfo.iso2);
+  const idCountryId = countryId.indexOf(iso);
+  const tooltipText = selectVariable();
+  const numberCase = state.dataCountryInfo[idCountryId][tooltipText[0]];
+  const population = state.dataCountryInfo[idCountryId].population;
+  let number = '';
+  if (state.absValue === true) {
+    number = numberCase;
+  } else if (state.absValue === false) {
+    number = ((numberCase / population) * 100000).toFixed(2);
+  }
+  const country = state.dataCountryInfo[idCountryId].country;
+  return [number, country, tooltipText[1]];
+};
+
+const createInfoPopup = () => {
+  info = L.control();
+
+  info.onAdd = () => {
+    infoDiv = L.DomUtil.create('div', 'info');
+    infoDiv.innerHTML = '<h4>Covid Information</h4> Hover over a country';
+    return infoDiv;
+  };
+
+  info.update = (iso) => {
+    const data = createTooltipText(iso);
+    infoDiv.innerHTML = `<h4>Covid Information</h4>${data[1]} =>  ${data[2]}:  ${data[0].toLocaleString()}`;
+  };
+
+  info.addTo(map);
+};
+
+const addCountryContur = () => {
+  const geoJsonData = state.dataGeoJson;
+  const myStyle = {
+    color: '#353535',
+    weight: 0,
+    opacity: 0.4,
+    dashArray: 3,
+    fillColor: '#353535',
+    fillOpacity: 0.1,
+  };
+  L.geoJSON(geoJsonData, {
+    style: myStyle,
+    onEachFeature: onEachFeatureFunc,
+  }).addTo(map);
+  createInfoPopup();
+};
+
+const removeMarkerOnMap = () => {
+  map.removeLayer(layerGroup);
+};
+
+const removeLegend = () => {
+  if (legendDiv.firstChild) {
+    while (legendDiv.firstChild) {
+      legendDiv.removeChild(legendDiv.firstChild);
     }
   }
-  if (state.confirmed === true) {
-    data = ['todayCases', 'Today Confirmed'];
-  } else if (state.recovered === true) {
-    data = ['todayRecovered', 'Today Recovered'];
-  } else if (state.deaths === true) {
-    data = ['todayDeaths', 'Today Deaths'];
+};
+
+const changeLegend = () => {
+  for (let i = 0; i < grades.length; i += 1) {
+    urlSize = typeOfMarker(grades[i] + 10);
+    let symbol = '';
+    if (grades[i + 1]) {
+      symbol = `&ndash;${grades[i + 1].toLocaleString()}`;
+    } else {
+      symbol = '+';
+    }
+    legendDiv.innerHTML
+      += `<div class ="legend_string">
+      <div class="legend_img" >
+      <img src="${urlSize.iconUrl}" alt="icon_circle" 
+      width="${urlSize.iconSize[0]}" height="${urlSize.iconSize[0]}"></div> 
+      <div class ="legend_text">${grades[i].toLocaleString()}${symbol}</div></div>`;   
   }
-  return data;
+};
+
+const createLegend = () => {
+  legend = L.control({ position: 'bottomleft' });
+
+  legend.onAdd = () => {
+    legendDiv = L.DomUtil.create('div', 'info legend');
+
+    for (let i = 0; i < grades.length; i += 1) {
+      urlSize = typeOfMarker(grades[i] + 10);
+      let symbol = '';
+      if (grades[i + 1]) {
+        symbol = `&ndash;${grades[i + 1].toLocaleString()}`;
+      } else {
+        symbol = '+';
+      }
+      legendDiv.innerHTML
+      += `<div class ="legend_string">
+      <div class="legend_img" >
+      <img src="${urlSize.iconUrl}" alt="icon_circle" 
+      width="${urlSize.iconSize[0]}" height="${urlSize.iconSize[0]}"></div> 
+      <div class ="legend_text">${grades[i].toLocaleString()}${symbol}</div></div>`;       
+    }
+    return legendDiv;
+  };
+  legend.addTo(map);
 };
 
 const addMarkerOnMap = () => {
@@ -221,14 +232,22 @@ const addMarkerOnMap = () => {
   const displayedData = selectVariable();
   const displayedNumber = displayedData[0];
   const displayedReason = displayedData[1];
+  let iconOptions = '';
 
   state.dataCountryInfo.forEach((item) => {
-    if (item[displayedNumber] > 0) {
-      const iconOptions = typeOfMarker(item[displayedNumber]);
+    if (item[displayedNumber] > 0 && item.population > 0) {
+      let number = '';
+      if (state.absValue === true) {
+        number = item[displayedNumber];
+      } else if (state.absValue === false) {
+        number = (item[displayedNumber] / item.population) * 100000;
+        number = number.toFixed(2);
+      }
+      iconOptions = typeOfMarker(number);
       const customIcon = L.icon(iconOptions);
       const coordinates = [item.countryInfo.lat, item.countryInfo.long];
       const markerOptions = {
-        title: `${item.country}, ${displayedReason}: ${item[displayedNumber].toLocaleString()}`,
+        title: `${item.country}, ${displayedReason}: ${number.toLocaleString()}`,
         riseOnHover: true,
         icon: customIcon,
       };

@@ -1,25 +1,21 @@
 import { state } from './main';
 import { setDataAllPeriodForGlobalTable, setDataTodayForGlobalTable, changeInfoByClickOnMap } from './globalTable';
 import { sortCountryDataByClick } from './dataSort';
-import { removeMarkerOnMap, addMarkerOnMap, changeLegend, removeLegend } from './map';
+import { removeMarkerOnMap, addMarkerOnMap, changeLegend, removeLegend, changeMapSize } from './map';
 import { searchProcess } from './search';
 
 const bodyScroll = document.querySelector('body');
-// Table Global Case
+
 const buttonSummaryAllPeriod = document.querySelector('.button__all-period');
 const buttonSummaryToday = document.querySelector('.button__last-day');
 const buttonSummaryAbs = document.querySelector('.button__abs');
 const buttonSummaryPerPopulation = document.querySelector('.button__per-population');
-//const totalConfirmed = document.querySelector('#total_confirm');
-//const totalRecover = document.querySelector('#total_recover');
-//const totalDeaths = document.querySelector('#total_deaths');
 const buttonGlobalCase = document.querySelector('.button__summery-global');
 const buttonFullScreenSummeryTable = document.querySelector('#full__screen-summery');
 const buttonFullScreenSummeryTableClose = document.querySelector('#full__screen-summery-exit');
 const tableSummery = document.querySelector('.table__summery-wrap');
 const tableSummeryData = document.querySelector('.table__summery-data-wrap');
 
-//Chart
 const buttonFullScreenChart = document.querySelector('#full__screen-chart');
 const buttonFullScreenChartClose = document.querySelector('#full__screen-chart-exit');
 const chartWrapper = document.querySelector('.chart-wrap');
@@ -31,7 +27,6 @@ const buttonChartConfirmed = document.querySelector('.button__confirmed-chart');
 const buttonChartRecovered = document.querySelector('.button__recovered-chart');
 const buttonChartDeaths = document.querySelector('.button__deaths-chart');
 
-// Table Countries
 const buttonCountriesAllPeriod = document.querySelector('.button__all-period-countries');
 const buttonCountriesToday = document.querySelector('.button__last-day-countries');
 const buttonCountriesAbs = document.querySelector('.button__abs-countries');
@@ -43,7 +38,6 @@ const buttonFullScreenCountriesTable = document.querySelector('#full__screen-cou
 const buttonFullScreenCountriesTableClose = document.querySelector('#full__screen-countries-exit');
 const countriesTableWrapper = document.querySelector('.table__city-list-wrap');
 
-// Map
 const buttonMapAllPeriod = document.querySelector('.button__all-period-map');
 const buttonMapToday = document.querySelector('.button__last-day-map');
 const buttonMapAbs = document.querySelector('.button__abs-map');
@@ -238,17 +232,17 @@ tableSummery.addEventListener('mouseleave', () => {
 });
 
 buttonFullScreenSummeryTable.addEventListener('click', () => {
-	tableSummery.classList.add('full-active');
-	tableSummeryData.classList.add('full-active');
-	bodyScroll.classList.add('stop-scroll');
+  tableSummery.classList.add('full-active');
+  tableSummeryData.classList.add('full-active');
+  bodyScroll.classList.add('stop-scroll');
   buttonFullScreenSummeryTable.classList.add('none');
   buttonFullScreenSummeryTableClose.classList.remove('none');
 });
 
 buttonFullScreenSummeryTableClose.addEventListener('click', () => {
-	tableSummery.classList.remove('full-active');
-	tableSummeryData.classList.remove('full-active');
-	bodyScroll.classList.remove('stop-scroll');
+  tableSummery.classList.remove('full-active');
+  tableSummeryData.classList.remove('full-active');
+  bodyScroll.classList.remove('stop-scroll');
   buttonFullScreenSummeryTable.classList.remove('none');
   buttonFullScreenSummeryTableClose.classList.add('none');
 });
@@ -264,15 +258,15 @@ chartWrapper.addEventListener('mouseleave', () => {
 });
 
 buttonFullScreenChart.addEventListener('click', () => {
-	chartWrapper.classList.add('full-active');
-	bodyScroll.classList.add('stop-scroll');
+  chartWrapper.classList.add('full-active');
+  bodyScroll.classList.add('stop-scroll');
   buttonFullScreenChart.classList.add('none');
   buttonFullScreenChartClose.classList.remove('none');
 });
 
 buttonFullScreenChartClose.addEventListener('click', () => {
-	chartWrapper.classList.remove('full-active');
-	bodyScroll.classList.remove('stop-scroll');
+  chartWrapper.classList.remove('full-active');
+  bodyScroll.classList.remove('stop-scroll');
   buttonFullScreenChart.classList.remove('none');
   buttonFullScreenChartClose.classList.add('none');
 });
@@ -288,39 +282,40 @@ mapWrapper.addEventListener('mouseleave', () => {
 });
 
 buttonFullScreenMap.addEventListener('click', () => {
-	mapWrapper.classList.add('full-active');
-	bodyScroll.classList.add('stop-scroll');
+  mapWrapper.classList.add('full-active');
+  bodyScroll.classList.add('stop-scroll');
+  changeMapSize();
   buttonFullScreenMap.classList.add('none');
   buttonFullScreenMapClose.classList.remove('none');
 });
 
 buttonFullScreenMapClose.addEventListener('click', () => {
-	mapWrapper.classList.remove('full-active');
-	bodyScroll.classList.remove('stop-scroll');
+  mapWrapper.classList.remove('full-active');
+  bodyScroll.classList.remove('stop-scroll');
   buttonFullScreenMap.classList.remove('none');
   buttonFullScreenMapClose.classList.add('none');
 });
 
 countriesTableWrapper.addEventListener('mouseenter', () => {
-	if (!mapWrapper.classList.contains('full-active')) {
-		buttonFullScreenCountriesTable.classList.remove('none');
-	}
+  if (!mapWrapper.classList.contains('full-active')) {
+    buttonFullScreenCountriesTable.classList.remove('none');
+  }
 });
 
 countriesTableWrapper.addEventListener('mouseleave', () => {
-	buttonFullScreenCountriesTable.classList.add('none');
+  buttonFullScreenCountriesTable.classList.add('none');
 });
 
 buttonFullScreenCountriesTable.addEventListener('click', () => {
-	countriesTableWrapper.classList.add('full-active');
-	bodyScroll.classList.add('stop-scroll');
-	buttonFullScreenCountriesTable.classList.add('none');
-	buttonFullScreenCountriesTableClose.classList.remove('none');
+  countriesTableWrapper.classList.add('full-active');
+  bodyScroll.classList.add('stop-scroll');
+  buttonFullScreenCountriesTable.classList.add('none');
+  buttonFullScreenCountriesTableClose.classList.remove('none');
 });
 
 buttonFullScreenCountriesTableClose.addEventListener('click', () => {
-	countriesTableWrapper.classList.remove('full-active');
-	bodyScroll.classList.remove('stop-scroll');
-	buttonFullScreenCountriesTable.classList.remove('none');
-	buttonFullScreenCountriesTableClose.classList.add('none');
+  countriesTableWrapper.classList.remove('full-active');
+  bodyScroll.classList.remove('stop-scroll');
+  buttonFullScreenCountriesTable.classList.remove('none');
+  buttonFullScreenCountriesTableClose.classList.add('none');
 });

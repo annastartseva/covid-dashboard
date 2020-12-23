@@ -26,6 +26,10 @@ const createMap = () => {
   map.addLayer(layer);
 };
 
+const changeMapSize = () => {
+  map.invalidateSize();
+};
+
 const highlightFeature = (e) => {
   const layer = e.target;
 
@@ -196,7 +200,7 @@ const changeLegend = () => {
       <div class="legend_img" >
       <img src="${urlSize.iconUrl}" alt="icon_circle" 
       width="${urlSize.iconSize[0]}" height="${urlSize.iconSize[0]}"></div> 
-      <div class ="legend_text">${grades[i].toLocaleString()}${symbol}</div></div>`;   
+      <div class ="legend_text">${grades[i].toLocaleString()}${symbol}</div></div>`;
   }
 };
 
@@ -219,7 +223,7 @@ const createLegend = () => {
       <div class="legend_img" >
       <img src="${urlSize.iconUrl}" alt="icon_circle" 
       width="${urlSize.iconSize[0]}" height="${urlSize.iconSize[0]}"></div> 
-      <div class ="legend_text">${grades[i].toLocaleString()}${symbol}</div></div>`;       
+      <div class ="legend_text">${grades[i].toLocaleString()}${symbol}</div></div>`;
     }
     return legendDiv;
   };
@@ -266,6 +270,6 @@ const addMarkerOnMap = () => {
 };
 
 export {
-  createMap, addMarkerOnMap, createLegend,
+  createMap, addMarkerOnMap, createLegend, changeMapSize,
   removeMarkerOnMap, addCountryContur, changeLegend, removeLegend,
 };

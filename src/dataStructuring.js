@@ -25,7 +25,13 @@ const createDataStructure = (countriesDataArray) => {
 };
 
 const createDataStructureForChart = (dataCovidDates) => {
-  console.log('data', dataCovidDates);
+  let dataObject = {};
+  if(state.allWorld === true) {
+    dataObject = dataCovidDates;
+  } else {
+    dataObject = dataCovidDates.information;
+  }
+
   const period = state.allPeriod;
   const value = state.absValue;
   const confirmed = state.confirmed;
@@ -36,9 +42,9 @@ const createDataStructureForChart = (dataCovidDates) => {
   const intermediateArray = [];
 
   if (period === true && value === true && confirmed === true) {
-    outputData = Object.entries(dataCovidDates.cases);
+    outputData = Object.entries(dataObject.cases);
   } else if (period === false && value === true && confirmed === true) {
-    const array = Object.entries(dataCovidDates.cases);
+    const array = Object.entries(dataObject.cases);
     array.forEach((element, index) => {
       if (index === 0) {
         outputData.push([element[0], element[1]]);
@@ -47,12 +53,12 @@ const createDataStructureForChart = (dataCovidDates) => {
       }
     });
   } else if (period === true && value === false && confirmed === true) {
-    const array = Object.entries(dataCovidDates.cases);
+    const array = Object.entries(dataObject.cases);
     array.forEach((element) => {
       outputData.push([element[0], Math.round((element[1] / (population / 100000)) * 100) / 100]);
     });
   } else if (period === false && value === false && confirmed === true) {
-    const array = Object.entries(dataCovidDates.cases);
+    const array = Object.entries(dataObject.cases);
     array.forEach((element, index) => {
       if (index === 0) {
         intermediateArray.push([element[0], element[1]]);
@@ -64,9 +70,9 @@ const createDataStructureForChart = (dataCovidDates) => {
       outputData.push([element[0], Math.round((element[1] / (population / 100000)) * 100) / 100]);
     });
   } else if (period === true && value === true && deaths === true) {
-    outputData = Object.entries(dataCovidDates.deaths);
+    outputData = Object.entries(dataObject.deaths);
   } else if (period === false && value === true && deaths === true) {
-    const array = Object.entries(dataCovidDates.deaths);
+    const array = Object.entries(dataObject.deaths);
     array.forEach((element, index) => {
       if (index === 0) {
         outputData.push([element[0], element[1]]);
@@ -75,12 +81,12 @@ const createDataStructureForChart = (dataCovidDates) => {
       }
     });
   } else if (period === true && value === false && deaths === true) {
-    const array = Object.entries(dataCovidDates.deaths);
+    const array = Object.entries(dataObject.deaths);
     array.forEach((element) => {
       outputData.push([element[0], Math.round((element[1] / (population / 100000)) * 100) / 100]);
     });
   } else if (period === false && value === false && deaths === true) {
-    const array = Object.entries(dataCovidDates.cases);
+    const array = Object.entries(dataObject.cases);
     array.forEach((element, index) => {
       if (index === 0) {
         intermediateArray.push([element[0], element[1]]);
@@ -92,9 +98,9 @@ const createDataStructureForChart = (dataCovidDates) => {
       outputData.push([element[0], Math.round((element[1] / (population / 100000)) * 100) / 100]);
     });
   } else if (period === true && value === true && recovered === true) {
-    outputData = Object.entries(dataCovidDates.recovered);
+    outputData = Object.entries(dataObject.recovered);
   } else if (period === false && value === true && recovered === true) {
-    const array = Object.entries(dataCovidDates.recovered);
+    const array = Object.entries(dataObject.recovered);
     array.forEach((element, index) => {
       if (index === 0) {
         outputData.push([element[0], element[1]]);
@@ -103,12 +109,12 @@ const createDataStructureForChart = (dataCovidDates) => {
       }
     });
   } else if (period === true && value === false && recovered === true) {
-    const array = Object.entries(dataCovidDates.recovered);
+    const array = Object.entries(dataObject.recovered);
     array.forEach((element) => {
       outputData.push([element[0], Math.round((element[1] / (population / 100000)) * 100) / 100]);
     });
   } else if (period === false && value === false && recovered === true) {
-    const array = Object.entries(dataCovidDates.cases);
+    const array = Object.entries(dataObject.cases);
     array.forEach((element, index) => {
       if (index === 0) {
         intermediateArray.push([element[0], element[1]]);

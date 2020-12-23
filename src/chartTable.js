@@ -1,7 +1,7 @@
 import Chart from 'chart.js';
 
 const ctx = document.getElementById('myChart').getContext('2d');
-const config = {
+const myChart = new Chart(ctx, {
   type: 'bar',
   data: {
     labels: [],
@@ -22,13 +22,13 @@ const config = {
     },
     tooltips: {
       callbacks: {
-        labelColor: function (tooltipItem, chart) {
+        labelColor: function () {
           return {
             borderColor: 'rgb(255, 0, 0)',
             backgroundColor: 'rgb(255, 0, 0)',
           };
         },
-        labelTextColor: function (tooltipItem, chart) {
+        labelTextColor: function () {
           return '#543453';
         },
       },
@@ -41,20 +41,20 @@ const config = {
       }],
     },
   },
-};
-
+});
 const createChart = (outputData) => {
+
+  myChart.config.data.labels = [];
+  myChart.config.data.datasets[0].data = [];
+  myChart.config.data.datasets[0].label = '';
+
   outputData.forEach((element) => {
-    config.data.labels.push(new Date(element[0]).toLocaleDateString());
-    config.data.datasets[0].data.push(element[1]);
-    config.data.datasets[0].label = 'Global';
+    myChart.config.data.labels.push(new Date(element[0]).toLocaleDateString());
+    myChart.config.data.datasets[0].data.push(element[1]);
+    myChart.config.data.datasets[0].label = 'Global';
   });
-  console.log(config.data.labels[0]);
-  const myChart = new Chart(ctx, config);
+
+  myChart.update();
 };
 
-// config.data.datasets[0].backgroundColor = 'blue';
-
-document.querySelector('.button__recovered-chart').addEventListener('click', () => myChart.update());
-
-export { createChart };
+export { createChart, myChart };

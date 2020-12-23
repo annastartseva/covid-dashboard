@@ -110,7 +110,6 @@ const buttonDeathAddSelect = () => {
 };
 
 const setDataToAllElement = () => {
-  console.log('function setDataToAllElement');
   if (state.allWorld === true) {
     if (state.allPeriod === true) {
       setDataAllPeriodForGlobalTable(state.dataCovid);
@@ -119,8 +118,7 @@ const setDataToAllElement = () => {
     }
   } else {
     changeInfoByClickOnMap();
-  }  
-  // console.log('state ', state);
+  }
 };
 
 const functionForChangeInfo = () => {
@@ -138,7 +136,6 @@ const functionForChangeInfoSecond = () => {
 };
 
 const changeDataInAllModules = (event) => {
-  console.log('state.allWorld ', state.allWorld);
   if (event.target === buttonCountriesAllPeriod
     || event.target === buttonMapAllPeriod
     || event.target === buttonSummaryAllPeriod) {
@@ -190,7 +187,6 @@ const changeDataInAllModules = (event) => {
     state.allWorld = true;
     setDataToAllElement();
   }
-  console.log('event ', event);
 };
 
 document.querySelector('#search__field').addEventListener('input', searchProcess);

@@ -3,21 +3,11 @@ import { state } from './main';
 
 const createTable = (dataForCreation) => {
   state.dataList = dataForCreation;
-  console.log('datalist:', state.dataList, state);
   if (document.querySelector('#table__wrapper')) {
     document.querySelector('#table__wrapper').remove();
   }
-  // if (document.querySelector('#search__field')) {
-  //   document.querySelector('#search__field').remove();
-  // }
 
   const wrapper = document.querySelector('.countries__table-wrap');
-
-  // const searchField = document.createElement('input');
-  // searchField.setAttribute('list', 'menu');
-  // searchField.id = 'search__field';
-  // wrapper.appendChild(searchField);
-
   const tableWrapper = document.createElement('div');
   tableWrapper.id = 'table__wrapper';
   const table = document.createElement('table');

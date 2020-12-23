@@ -23,6 +23,13 @@ const tableSummeryData = document.querySelector('.table__summery-data-wrap');
 const buttonFullScreenChart = document.querySelector('#full__screen-chart');
 const buttonFullScreenChartClose = document.querySelector('#full__screen-chart-exit');
 const chartWrapper = document.querySelector('.chart-wrap');
+const buttonChartAllPeriod = document.querySelector('.button__all-period-chart');
+const buttonChartToday = document.querySelector('.button__last-day-chart');
+const buttonChartAbs = document.querySelector('.button__abs-chart');
+const buttonChartPerPopulation = document.querySelector('.button__per-population-chart');
+const buttonChartConfirmed = document.querySelector('.button__confirmed-chart');
+const buttonChartRecovered = document.querySelector('.button__recovered-chart');
+const buttonChartDeaths = document.querySelector('.button__deaths-chart');
 
 // Table Countries
 const buttonCountriesAllPeriod = document.querySelector('.button__all-period-countries');
@@ -52,63 +59,80 @@ const buttonAllPeriodAddSelect = () => {
   buttonSummaryAllPeriod.classList.add('select');
   buttonCountriesAllPeriod.classList.add('select');
   buttonMapAllPeriod.classList.add('select');
+  buttonChartAllPeriod.classList.add('select');
   buttonSummaryToday.classList.remove('select');
   buttonCountriesToday.classList.remove('select');
   buttonMapToday.classList.remove('select');
+  buttonChartToday.classList.remove('select');
 };
 
 const buttonTodaySelect = () => {
   buttonSummaryAllPeriod.classList.remove('select');
   buttonCountriesAllPeriod.classList.remove('select');
   buttonMapAllPeriod.classList.remove('select');
+  buttonChartAllPeriod.classList.remove('select');
   buttonSummaryToday.classList.add('select');
   buttonCountriesToday.classList.add('select');
   buttonMapToday.classList.add('select');
+  buttonChartToday.classList.add('select');
 };
 
 const buttonAbsAddSelect = () => {
   buttonSummaryAbs.classList.add('select');
   buttonCountriesAbs.classList.add('select');
   buttonMapAbs.classList.add('select');
+  buttonChartAbs.classList.add('select');
   buttonSummaryPerPopulation.classList.remove('select');
   buttonCountriesPerPopulation.classList.remove('select');
   buttonMapPerPopulation.classList.remove('select');
+  buttonChartPerPopulation.classList.remove('select');
 };
 
 const buttonPopulationAddSelect = () => {
   buttonSummaryAbs.classList.remove('select');
   buttonCountriesAbs.classList.remove('select');
   buttonMapAbs.classList.remove('select');
+  buttonChartAbs.classList.remove('select');
   buttonSummaryPerPopulation.classList.add('select');
   buttonCountriesPerPopulation.classList.add('select');
   buttonMapPerPopulation.classList.add('select');
+  buttonChartPerPopulation.classList.add('select');
 };
 
 const buttonConfirmAddSelect = () => {
   buttonCountriesConfirmed.classList.add('select');
   buttonMapConfirmed.classList.add('select');
+  buttonChartConfirmed.classList.add('select');
   buttonCountriesRecovered.classList.remove('select');
   buttonCountriesDeaths.classList.remove('select');
   buttonMapRecovered.classList.remove('select');
   buttonMapDeaths.classList.remove('select');
+  buttonChartRecovered.classList.remove('select');
+  buttonChartDeaths.classList.remove('select');
 };
 
 const buttonRecoverAddSelect = () => {
   buttonCountriesConfirmed.classList.remove('select');
   buttonMapConfirmed.classList.remove('select');
+  buttonChartConfirmed.classList.remove('select');
   buttonCountriesRecovered.classList.add('select');
   buttonMapRecovered.classList.add('select');
+  buttonChartRecovered.classList.add('select');
   buttonCountriesDeaths.classList.remove('select');
   buttonMapDeaths.classList.remove('select');
+  buttonChartDeaths.classList.remove('select');
 };
 
 const buttonDeathAddSelect = () => {
   buttonCountriesConfirmed.classList.remove('select');
   buttonMapConfirmed.classList.remove('select');
+  buttonChartConfirmed.classList.remove('select');
   buttonCountriesRecovered.classList.remove('select');
   buttonMapRecovered.classList.remove('select');
+  buttonChartRecovered.classList.remove('select');
   buttonCountriesDeaths.classList.add('select');
   buttonMapDeaths.classList.add('select');
+  buttonChartDeaths.classList.remove('select');
 };
 
 const setDataToAllElement = () => {
@@ -140,46 +164,55 @@ const functionForChangeInfoSecond = () => {
 const changeDataInAllModules = (event) => {
   if (event.target === buttonCountriesAllPeriod
     || event.target === buttonMapAllPeriod
-    || event.target === buttonSummaryAllPeriod) {
+    || event.target === buttonSummaryAllPeriod
+    || event.target === buttonChartAllPeriod) {
     state.allPeriod = true;
     buttonAllPeriodAddSelect();
     setDataToAllElement();
     functionForChangeInfo();
   } else if (event.target === buttonCountriesToday
     || event.target === buttonSummaryToday
-    || event.target === buttonMapToday) {
+    || event.target === buttonMapToday
+    || event.target === buttonChartToday) {
     state.allPeriod = false;
     buttonTodaySelect();
     setDataToAllElement();
     functionForChangeInfo();
   } else if (event.target === buttonSummaryAbs
     || event.target === buttonCountriesAbs
-    || event.target === buttonMapAbs) {
+    || event.target === buttonMapAbs
+    || event.target === buttonChartAbs) {
     state.absValue = true;
     buttonAbsAddSelect();
     setDataToAllElement();
     functionForChangeInfo();
   } else if (event.target === buttonSummaryPerPopulation
     || event.target === buttonCountriesPerPopulation
-    || event.target === buttonMapPerPopulation) {
+    || event.target === buttonMapPerPopulation
+    || event.target === buttonChartPerPopulation) {
     state.absValue = false;
     buttonPopulationAddSelect();
     setDataToAllElement();
     functionForChangeInfo();
   } else if (event.target === buttonCountriesConfirmed
-    || event.target === buttonMapConfirmed) {
+    || event.target === buttonMapConfirmed
+    || event.target === buttonChartConfirmed) {
     state.confirmed = true;
     state.recovered = false;
     state.deaths = false;
     buttonConfirmAddSelect();
     functionForChangeInfoSecond();
-  } else if (event.target === buttonCountriesRecovered || event.target === buttonMapRecovered) {
+  } else if (event.target === buttonCountriesRecovered
+    || event.target === buttonMapRecovered
+    || event.target === buttonChartRecovered) {
     state.confirmed = false;
     state.recovered = true;
     state.deaths = false;
     buttonRecoverAddSelect();
     functionForChangeInfoSecond();
-  } else if (event.target === buttonCountriesDeaths || event.target === buttonMapDeaths) {
+  } else if (event.target === buttonCountriesDeaths
+    || event.target === buttonMapDeaths
+    || event.target === buttonChartDeaths) {
     state.confirmed = false;
     state.recovered = false;
     state.deaths = true;

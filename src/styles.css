@@ -581,8 +581,6 @@ background-color: rgb(39, 0, 0);
 }
 
 #search__field {
-  /*position: sticky;
-	top: 0;*/
 	width: 99%;
 	height: 5%;
 	margin: 1rem auto;
@@ -634,7 +632,7 @@ background-color: rgb(39, 0, 0);
 
 .keyboard {
     display: none;
-    color: white;
+    color: darkgrey;
     position: relative;
     overflow: hidden;
     transition: 1s linear;
@@ -643,16 +641,16 @@ background-color: rgb(39, 0, 0);
     bottom: 91vh;
     z-index: 999;
     background-color: #080808;
-    width: 74vw;
-    height: 40vh;
-	box-shadow: 0 0 20px 13px;
+    width: 70vw;
+    height: 35vh;
+	box-shadow: 0 0 10px 2px;
 	text-align: center;
 }
 
 .keyboard__row {
     grid-template-columns: repeat(13, 1fr);
 	display: grid;
-	height: 8vh;
+	height: 7vh;
 }
 
 .keyboard__key {
@@ -681,11 +679,11 @@ background-color: rgb(39, 0, 0);
 }
 
 .sub {
-	color: rgb(160, 4, 4);
+	color: red;
 }
 
 .letter {
-	color: rgb(77, 77, 77);
+	color: white;
 }
 
 /* footer */

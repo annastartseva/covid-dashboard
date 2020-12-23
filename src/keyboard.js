@@ -303,6 +303,8 @@ class Keyboard {
           }
           this.output.setSelectionRange(cursorPos, cursorPos);
           searchProcess();
+          document.querySelector('.keyboard').classList.remove('off');
+          document.querySelector('.keyboard').classList.add('on');
         },
         Space: () => {
           if (this.output.selectionStart !== this.output.selectionEnd
@@ -320,6 +322,8 @@ class Keyboard {
           this.output.value = `${left} ${right}`;
           cursorPos += 1;
           this.output.setSelectionRange(cursorPos, cursorPos);
+          document.querySelector('.keyboard').classList.remove('off');
+          document.querySelector('.keyboard').classList.add('on');
         },
       };
       if (textHandlers[keyObj.code]) textHandlers[keyObj.code]();

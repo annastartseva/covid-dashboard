@@ -69,6 +69,8 @@ const sortCountryDataByClick = () => {
       data: element[paramName],
       name: element.country,
       flag: element.countryInfo.flag,
+      id: element.countryInfo._id,
+      iso: element.countryInfo.iso2,
     };
     array.push(obj);
   });

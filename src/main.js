@@ -26,6 +26,7 @@ const state = {
   confirmed: true,
   recovered: false,
   deaths: false,
+  countryNameForChart: null,
   dataList: [],
 };
 

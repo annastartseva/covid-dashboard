@@ -1,7 +1,6 @@
 import { state } from './main';
 import { changeInfoByClickOnMap } from './globalTable';
 import { createDataStructureForChart } from './dataStructuring';
-import { myChart } from './chartTable';
 
 const searchProcess = () => {
   if (document.querySelector('.menu')) {
@@ -143,9 +142,11 @@ const searchProcess = () => {
     && element.name.toUpperCase().endsWith(input.value.toUpperCase())) {
       state.countryId = element.iso;
       state.allWorld = false;
+      state.countryNameForChart = element.name;
       changeInfoByClickOnMap();
       createDataStructureForChart(element);
-      myChart.remove();
+      document.querySelector('.keyboard').classList.remove('on');
+      document.querySelector('.keyboard').classList.add('off');
     }
     if (element.name.toUpperCase().startsWith(input.value.toUpperCase())) {
       const option = document.createElement('div');

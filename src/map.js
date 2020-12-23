@@ -150,18 +150,16 @@ const createLegend = () => {
 
     for (let i = 0; i < grades.length; i++) {
       urlSize = typeOfMarker(grades[i] + 10);
-      legendDiv.innerHTML +=
-        `<div class ="legend_string">
+      legendDiv.innerHTML
+        += `<div class ="legend_string">
         <div class="legend_img" >
         <img src="${urlSize.iconUrl}" alt="icon_circle" 
         width="${urlSize.iconSize[0]}" height="${urlSize.iconSize[0]}"></div> 
         <div class ="legend_text">` + grades[i].toLocaleString() + (grades[i + 1] ? '&ndash;'
           + grades[i + 1].toLocaleString() : '+' + '</div></div>');
-    }
-    console.log('legendDiv ', legendDiv);
+    }    
     return legendDiv;
   };
-
   legend.addTo(map);
 };
 
@@ -206,14 +204,13 @@ const selectVariable = () => {
     } else if (state.deaths === true) {
       data = ['deaths', 'Total Deaths'];
     }
-  } else {
-    if (state.confirmed === true) {
-      data = ['todayCases', 'Today Confirmed'];
-    } else if (state.recovered === true) {
-      data = ['todayRecovered', 'Today Recovered'];
-    } else if (state.deaths === true) {
-      data = ['todayDeaths', 'Today Deaths'];
-    }
+  }
+  if (state.confirmed === true) {
+    data = ['todayCases', 'Today Confirmed'];
+  } else if (state.recovered === true) {
+    data = ['todayRecovered', 'Today Recovered'];
+  } else if (state.deaths === true) {
+    data = ['todayDeaths', 'Today Deaths'];
   }
   return data;
 };
@@ -238,16 +235,18 @@ const addMarkerOnMap = () => {
       markerOne = L.marker(coordinates, markerOptions);
       oneLayer.push(markerOne);
 
-      markerOne.on("click", function () {
+      markerOne.on('click', () => {
         state.countryId = item.countryInfo.iso2;
-        console.log('state.countryId ', state.countryId);
         state.allWorld = false;
         changeInfoByClickOnMap();
-      })
+      });
     }
   });
   layerGroup = L.layerGroup(oneLayer);
-  layerGroup.addTo(map);   
+  layerGroup.addTo(map);
 };
 
-export { createMap, addMarkerOnMap, createLegend, removeMarkerOnMap, addCountryContur, changeLegend, removeLegend };
+export {
+  createMap, addMarkerOnMap, createLegend,
+  removeMarkerOnMap, addCountryContur, changeLegend, removeLegend,
+};

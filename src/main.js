@@ -4,6 +4,8 @@ import {
 } from './map';
 import { createDataStructure, createDataStructureForChart } from './dataStructuring';
 
+const dataUpdate = document.querySelector('.actual__data');
+
 // const url
 const urlSummary = 'https://disease.sh/v3/covid-19/all';
 const urlSummaryWithDates = 'https://disease.sh/v3/covid-19/historical/all?lastdays=all';
@@ -59,7 +61,9 @@ async function getSummaryGlobalData() {
   // console.log('function getSummaryGlobalData');
   const res = await fetch(urlSummary);
   state.dataCovid = await res.json();
-  // console.log('state.dataCovid: ', state.dataCovid);
+  const createDataUpdate = new Date(state.dataCovid.updated);
+  dataUpdate.innerHTML = `Last Update <br> ${createDataUpdate}`;
+  console.log('state.dataCovid: ', state.dataCovid);
   setDataAllPeriodForGlobalTable(state.dataCovid);
 }
 

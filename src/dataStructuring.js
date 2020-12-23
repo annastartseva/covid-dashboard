@@ -25,6 +25,7 @@ const createDataStructure = (countriesDataArray) => {
 };
 
 const createDataStructureForChart = (dataCovidDates) => {
+  console.log('data', dataCovidDates);
   const period = state.allPeriod;
   const value = state.absValue;
   const confirmed = state.confirmed;
@@ -32,7 +33,7 @@ const createDataStructureForChart = (dataCovidDates) => {
   const recovered = state.recovered;
   const population = state.dataCovid.population;
   let outputData = [];
-  let intermediateArray = [];
+  const intermediateArray = [];
 
   if (period === true && value === true && confirmed === true) {
     outputData = Object.entries(dataCovidDates.cases);

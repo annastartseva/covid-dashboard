@@ -1,5 +1,4 @@
-import { state } from './main';
-import { searchProcess, searchCountries } from './search';
+import { searchProcess } from './search';
 
 const language = {
   ru: [
@@ -608,9 +607,9 @@ const language = {
   ],
 };
 
-// window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-// const recognition = new SpeechRecognition();
+const recognition = new SpeechRecognition();
 
 let printPermission = true;
 
@@ -696,14 +695,14 @@ const keyboardWrapper = create('div', 'keyboard__wrapper',
   [create('button', 'power', 'Turn On/Off'),
     create('audio', 'audio', null, null, ['audio', '1'])]);
 
-// const createAudio = () => {
-//   for (let i = 1; i <= 6; i += 1) {
-//     const audio = document.createElement('audio');
-//     audio.src = `./assets/audio/${i}.wav`;
-//     audio.setAttribute('class', 'audio');
-//     document.querySelector('.keyboard__wrapper').appendChild(audio);
-//   }
-// };
+const createAudio = () => {
+  for (let i = 1; i <= 6; i += 1) {
+    const audio = document.createElement('audio');
+    audio.src = `./assets/audio/${i}.wav`;
+    audio.setAttribute('class', 'audio');
+    document.querySelector('.keyboard__wrapper').appendChild(audio);
+  }
+};
 
 class Keyboard {
   constructor(orderOfRows) {
@@ -717,7 +716,7 @@ class Keyboard {
 
   init(langCode) {
     this.keyBase = language[langCode];
-    
+
     this.output = document.querySelector('#search__field');
     // this.output = create('textarea', 'output', null, keyboardWrapper,
     //   ['placeholder', 'Print here'],
@@ -1021,9 +1020,7 @@ class Keyboard {
             cursorPos -= 1;
           }
           this.output.setSelectionRange(cursorPos, cursorPos);
-          searchProcess(null, this.output.value);
-          if (this.output.value === '') {
-          }
+          searchProcess();
         },
         Space: () => {
           if (this.container.dataset.language === 'en') {
@@ -1048,57 +1045,57 @@ class Keyboard {
     }
   }
 
-  // voiceInput = () => {
-  //   if (this.container.dataset.language === 'ru') {
-  //     recognition.lang = 'ru-RU';
-  //   } else if (this.container.dataset.language === 'en') {
-  //     recognition.lang = 'en-US';
-  //   }
+  voiceInput = () => {
+    if (this.container.dataset.language === 'ru') {
+      recognition.lang = 'ru-RU';
+    } else if (this.container.dataset.language === 'en') {
+      recognition.lang = 'en-US';
+    }
 
-  //   recognition.interimResults = true;
-  //   recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.continuous = true;
 
-  //   // recognition.addEventListener('result', (e) => {
-  //   //   const transcript = Array.from(e.results)
-  //   //     .map((result) => result[0])
-  //   //     .map((result) => result.transcript)
-  //   //     .join('');
+    // recognition.addEventListener('result', (e) => {
+    //   const transcript = Array.from(e.results)
+    //     .map((result) => result[0])
+    //     .map((result) => result.transcript)
+    //     .join('');
 
-  //   //   if (e.results[0].isFinal) {
-  //   //     this.output.value = `${transcript}`;
-  //   //   }
-  //   // });
+    //   if (e.results[0].isFinal) {
+    //     this.output.value = `${transcript}`;
+    //   }
+    // });
 
-  //   // recognition.onend = function () {
-  //   //   recognition.start();
-  //   // };
+    // recognition.onend = function () {
+    //   recognition.start();
+    // };
 
-  //   // if (this.state === true) {
-  //   //   recognition.stop();
-  //   //   recognition.onend = null;
-  //   // }
-  // }
+    // if (this.state === true) {
+    //   recognition.stop();
+    //   recognition.onend = null;
+    // }
+  }
 }
 
 new Keyboard(rowsOrder).init(lang).generateLayout();
 
-// createAudio();
+createAudio();
 
-// const turnOnOff = () => {
-//   if (printPermission === true && document.getElementsByClassName('output')[0].disabled !== true) {
-//     document.getElementsByClassName('output')[0].setAttribute('disabled', '');
-//     printPermission = false;
-//     for (let i = 0; i <= 6; i += 1) {
-//       document.getElementsByClassName('audio')[i].muted = true;
-//     }
-//   } else {
-//     document.getElementsByClassName('output')[0].removeAttribute('disabled');
-//     printPermission = true;
-//     for (let i = 0; i <= 6; i += 1) {
-//       document.getElementsByClassName('audio')[i].muted = false;
-//     }
-//   }
-//   document.getElementsByClassName('keyboard')[0].classList.toggle('turnOff');
-// };
+const turnOnOff = () => {
+  if (printPermission === true && document.getElementsByClassName('output')[0].disabled !== true) {
+    document.getElementsByClassName('output')[0].setAttribute('disabled', '');
+    printPermission = false;
+    for (let i = 0; i <= 6; i += 1) {
+      document.getElementsByClassName('audio')[i].muted = true;
+    }
+  } else {
+    document.getElementsByClassName('output')[0].removeAttribute('disabled');
+    printPermission = true;
+    for (let i = 0; i <= 6; i += 1) {
+      document.getElementsByClassName('audio')[i].muted = false;
+    }
+  }
+  document.getElementsByClassName('keyboard')[0].classList.toggle('turnOff');
+};
 
-// document.getElementsByClassName('power')[0].addEventListener('click', turnOnOff);
+document.getElementsByClassName('power')[0].addEventListener('click', turnOnOff);
